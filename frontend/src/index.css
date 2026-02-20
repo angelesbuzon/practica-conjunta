@@ -1,7 +1,11 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #ef4444; /* Puedes cambiar este rojo por el color principal de tu marca */
+  --color-primary: #F3731C; /* Orange */
+  --color-secondary: #F2B90D; /* Gold/Amber */
+  --color-light: #FAF9F6;
+  --color-gray: #9ca3af; /* = Gray 400 in Tailwind */
+  --color-dark: #333;
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
