@@ -52,6 +52,21 @@ Inicio del desarrollo del frontend en React con la implementación del component
     - Estructura del footer con secciones: Logo/Descripción, Descubre, Compañía, Soporte.
     - Copyright centrado en la sección inferior del footer.
 
+### Sesión 4 - [20-02-2026] - Componentes Home y Button
+
+**Responsable:** Ángeles
+
+**Detalles técnicos adicionales implementados en esta sesión:**
+
+- **Recursos estáticos**:
+    - Añado imagen `hero.png`.
+
+- **Desarrollo de Componentes:**
+    - Versión básica del componente parametrizado `Button.jsx`, reutilizable en distintos macrocomponentes por los cuatro miembros del grupo.
+    - Empezado el macrocomponente `Home.jsx`. Dejo pendientes las secciones que requieren llamadas a API para estudiar más a fondo la lógica necesaria.
+
+- **Diseño y UX:**
+    - Creación de clases personalizadas Tailwind para la paleta de colores.
 
 ---
 

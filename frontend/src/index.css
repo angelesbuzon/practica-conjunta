@@ -4,7 +4,8 @@
   --color-primary: #F3731C; /* Orange */
   --color-secondary: #F2B90D; /* Gold/Amber */
   --color-light: #FAF9F6;
-  --color-gray: #9ca3af; /* = Gray 400 in Tailwind */
+  --color-gray-light: #9ca3af; /* = Gray 400 in Tailwind */
+  --color-gray-dark: #374151; /* = Gray 800 in Tailwind */
   --color-dark: #333;
 }
 

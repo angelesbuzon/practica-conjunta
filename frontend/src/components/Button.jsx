@@ -1,6 +1,6 @@
 /**
  * BUTTON: Rounded button hyperlinks
- * Changes color classes applied (primary || secondary || light) depending on the last string parameter
+ * Changes color classes applied (primary || invertedPrimary || secondary || light) depending on the last string parameter
  * 
  * Example of usage:
  * <Button anchorText="Click here" url="./mypage.html" color="primary" />
@@ -18,11 +18,13 @@ export function Button({anchorText, url, color}) {
     // Classes depending on colors:
     if (color == `primary`) {
         styleClasses += `bg-primary border-primary text-white`;
+    } else if (color == `invertedPrimary`) {
+        styleClasses += `bg-white border-white text-primary`;
     } else if (color == `secondary`) {
         styleClasses += `bg-secondary border-secondary text-dark`;
     } else {
         // Applied by default
-        styleClasses += `bg-white border-gray text-dark`;
+        styleClasses += `bg-white border-gray-light text-dark`;
     }
 
     /*
