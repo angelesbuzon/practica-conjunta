@@ -14,7 +14,7 @@ export default function Cart() {
 
     // Calc Delivery and Taxes
     const deliveryFee = cartItems.length > 0 ? 4.99 : 0;
-    const taxes = cartItems.length > 0 ? parseFloat((parseFloat(totalPrice) * 0.08).toFixed(2)) : 0;
+    const taxes = cartItems.length > 0 ? parseFloat((parseFloat(totalPrice) * 0.33).toFixed(2)) : 0;
     const finalTotal = (parseFloat(totalPrice) + deliveryFee + taxes).toFixed(2);
 
     const handleCheckout = async () => {
@@ -90,13 +90,13 @@ export default function Cart() {
                     
                     {/* Cart Header */}
                     <div className="flex justify-between items-end border-b border-stone-200 dark:border-stone-800 pb-4">
-                        <h2 className="text-xl font-semibold">{cartCount} Items in Cart</h2>
+                        <h2 className="text-xl font-semibold">{cartCount} {cartCount === 1 ? 'Producto' : 'Productos'} en el Carrito</h2>
                         {cartItems.length > 0 && (
                             <button 
                                 onClick={clearCart} 
                                 className="text-sm text-stone-500 dark:text-stone-400 hover:text-red-500 transition-colors bg-transparent border-none cursor-pointer"
                             >
-                                Clear Cart
+                                Vaciar Carrito
                             </button>
                         )}
                     </div>
@@ -146,7 +146,7 @@ export default function Cart() {
                                                         <h3 className="text-lg font-bold text-deep-green dark:text-white line-clamp-1">{item.strMeal}</h3>
                                                         <p className="text-sm text-stone-500 dark:text-stone-400 mt-1">{item.strCategory || 'Plato'} - {item.strArea || 'General'}</p>
                                                     </div>
-                                                    <span className="font-bold text-lg text-deep-green dark:text-white">${item.precio || '10.00'}</span>
+                                                    <span className="font-bold text-lg text-deep-green dark:text-white">{item.precio || '10.00'} €</span>
                                                 </div>
                                                 
                                                 {/* Ingredients Accordion Mock */}
@@ -170,7 +170,7 @@ export default function Cart() {
                                                     onClick={() => fullyRemoveFromCart(item.idMeal)}
                                                     className="text-sm text-stone-400 hover:text-red-500 flex items-center gap-1 transition-colors bg-transparent border-none cursor-pointer p-0"
                                                 >
-                                                    <span className="material-icons text-lg">delete_outline</span> Remove
+                                                    <span className="material-icons text-lg">delete_outline</span> Eliminar
                                                 </button>
                                                 <div className="flex items-center bg-background-light dark:bg-stone-800 rounded-lg p-1 border border-stone-200 dark:border-stone-700">
                                                     <button 
@@ -200,40 +200,40 @@ export default function Cart() {
                 <div className="lg:col-span-4 mt-8 lg:mt-0">
                     <div className="sticky top-28 bg-white dark:bg-stone-900 rounded-xl shadow-lg border border-primary/20 p-6 overflow-hidden">
                         <div className="absolute top-0 left-0 w-full h-1 bg-primary"></div>
-                        <h2 className="text-xl font-bold mb-6 text-deep-green dark:text-white">Order Summary</h2>
+                        <h2 className="text-xl font-bold mb-6 text-deep-green dark:text-white">Resumen del Pedido</h2>
                         
                         {/* Cost Breakdown */}
                         <div className="space-y-4 mb-6">
                             <div className="flex justify-between text-sm">
-                                <span className="text-stone-600 dark:text-stone-400">Subtotal ({cartCount} items)</span>
-                                <span className="font-medium text-deep-green dark:text-stone-200">${totalPrice}</span>
+                                <span className="text-stone-600 dark:text-stone-400">Subtotal ({cartCount} {cartCount === 1 ? 'producto' : 'productos'})</span>
+                                <span className="font-medium text-deep-green dark:text-stone-200">{totalPrice} €</span>
                             </div>
                             <div className="flex justify-between text-sm">
-                                <span className="text-stone-600 dark:text-stone-400">Delivery Fee</span>
-                                <span className="font-medium text-deep-green dark:text-stone-200">${deliveryFee.toFixed(2)}</span>
+                                <span className="text-stone-600 dark:text-stone-400">Gastos de Envío</span>
+                                <span className="font-medium text-deep-green dark:text-stone-200">{deliveryFee.toFixed(2)} €</span>
                             </div>
                             <div className="flex justify-between text-sm">
                                 <span className="text-stone-600 dark:text-stone-400 flex items-center gap-1">
-                                    Taxes
-                                    <span className="material-icons text-xs text-stone-400 cursor-help" title="8% Estimated Tax">info</span>
+                                    Impuestos
+                                    <span className="material-icons text-xs text-stone-400 cursor-help" title="33% de IVA estimado">info</span>
                                 </span>
-                                <span className="font-medium text-deep-green dark:text-stone-200">${taxes.toFixed(2)}</span>
+                                <span className="font-medium text-deep-green dark:text-stone-200">{taxes.toFixed(2)} €</span>
                             </div>
                         </div>
 
                         {/* Promo Code */}
                         <div className="mb-6">
-                            <label className="block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2">Promo Code</label>
+                            <label className="block text-xs font-semibold uppercase tracking-wider text-stone-500 mb-2">Código Promocional</label>
                             <div className="flex gap-2">
                                 <input 
                                     className="grow rounded-lg border-stone-200 dark:border-stone-700 bg-background-light dark:bg-stone-800 text-sm focus:ring-primary focus:border-primary px-3 py-2 outline-none"  
-                                    placeholder="Enter code" 
+                                    placeholder="Introduce tu código" 
                                     type="text"
                                     value={promoCode}
                                     onChange={(e) => setPromoCode(e.target.value)}
                                 />
                                 <button className="px-4 py-2 bg-stone-200 dark:bg-stone-800 text-stone-600 dark:text-stone-300 rounded-lg text-sm font-medium hover:bg-stone-300 dark:hover:bg-stone-700 transition-colors border-none cursor-pointer">
-                                    Apply
+                                    Aplicar
                                 </button>
                             </div>
                         </div>
@@ -245,8 +245,8 @@ export default function Cart() {
                         <div className="flex justify-between items-center mb-8">
                             <span className="text-lg font-bold text-deep-green dark:text-white">Total</span>
                             <div className="text-right">
-                                <span className="block text-2xl font-bold text-deep-green dark:text-white">${finalTotal}</span>
-                                <span className="text-xs text-stone-500">Including VAT</span>
+                                <span className="block text-2xl font-bold text-deep-green dark:text-white">{finalTotal} €</span>
+                                <span className="text-xs text-stone-500">IVA incluido</span>
                             </div>
                         </div>
 
@@ -262,7 +262,7 @@ export default function Cart() {
                                 <span className="material-icons animate-spin">refresh</span>
                             ) : (
                                 <>
-                                    Proceed to Checkout
+                                    Terminar Pedido
                                     <span className="material-icons group-hover:translate-x-1 transition-transform">arrow_forward</span>
                                 </>
                             )}
@@ -270,11 +270,11 @@ export default function Cart() {
 
                         {/* Trust Signals */}
                         <div className="mt-6 flex justify-center gap-4 text-stone-400">
-                            <span className="material-icons text-2xl" title="Secure Payment">lock</span>
-                            <span className="material-icons text-2xl" title="Fast Delivery">local_shipping</span>
-                            <span className="material-icons text-2xl" title="Fresh Guarantee">verified</span>
+                            <span className="material-icons text-2xl" title="Pago Seguro">lock</span>
+                            <span className="material-icons text-2xl" title="Envío Rápido">local_shipping</span>
+                            <span className="material-icons text-2xl" title="Garantía de Frescura">verified</span>
                         </div>
-                        <p className="text-center text-xs text-stone-400 mt-2">Secure checkout powered by Stripe</p>
+                        <p className="text-center text-xs text-stone-400 mt-2">Pago seguro procesado por Stripe</p>
                     </div>
                 </div>
 

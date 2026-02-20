@@ -94,7 +94,7 @@ export default function History() {
                                         </div>
                                         <div className="text-right">
                                             <p className="text-sm text-gray-500 mb-1">Total del Pedido</p>
-                                            <p className="text-2xl font-black text-primary">${orderTotal.toFixed(2)}</p>
+                                            <p className="text-2xl font-black text-primary">{orderTotal.toFixed(2)} €</p>
                                         </div>
                                     </div>
                                     
@@ -113,10 +113,10 @@ export default function History() {
                                                     </div>
                                                     <div className="grow text-center sm:text-left">
                                                         <h4 className="font-bold text-gray-900">{plato.plato_nombre}</h4>
-                                                        <p className="text-sm text-gray-500">{plato.cantidad}x  ${parseFloat(plato.precio_unitario || 0).toFixed(2)} / ud.</p>
+                                                        <p className="text-sm text-gray-500">{plato.cantidad}x  {parseFloat(plato.precio_unitario || 0).toFixed(2)} € / ud.</p>
                                                     </div>
                                                     <div className="font-bold text-gray-900">
-                                                        ${(parseFloat(plato.precio_unitario || 0) * (plato.cantidad || 1)).toFixed(2)}
+                                                        {(parseFloat(plato.precio_unitario || 0) * (plato.cantidad || 1)).toFixed(2)} €
                                                     </div>
                                                 </li>
                                             ))}

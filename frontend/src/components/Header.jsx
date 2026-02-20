@@ -1,13 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import logoUrl from '../img/logo.png';
 
 // Componente del Encabezado (Header)
 const Header = () => {
-  const { cartCount, totalPrice } = useCart();
-  // Estado para controlar si el buscador movil esta abierto
-  const [isMenuOpen, setIsMenuOpen] = useState(false);
-  const logoUrl = "../img/logo.png";
+const { cartCount, totalPrice } = useCart();
+// Estado para controlar si el buscador movil esta abierto
+const [isMenuOpen, setIsMenuOpen] = useState(false);
 
   return (
     <header className="sticky top-0 z-50 w-full bg-white backdrop-blur-md border-b border-gray-100">
@@ -48,7 +48,7 @@ const Header = () => {
             {/* Bolsa de la compra estilizada (tipo pastilla) */}
             <Link to="/cart" className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full hover:bg-primary/20 transition-all relative group">
               <span className="material-icons text-primary transition-colors">shopping_bag</span>
-              <span className="text-primary font-bold text-sm sm:text-base">${totalPrice}</span>
+              <span className="text-primary font-bold text-sm sm:text-base">{totalPrice} €</span>
               {cartCount > 0 && (
                 <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-[20px] px-1 bg-primary text-white text-[11px] font-bold rounded-full border-2 border-white">
                   {cartCount}
