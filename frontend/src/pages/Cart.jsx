@@ -3,7 +3,7 @@ import { useCart } from '../context/CartContext';
 import { useNavigate, Link } from 'react-router-dom';
 
 export default function Cart() {
-    const { cartItems, removeFromCart, addToCart, clearCart, totalPrice, cartCount } = useCart();
+    const { cartItems, removeFromCart, addToCart, clearCart, totalPrice, deliveryFee, taxes, finalTotal, cartCount } = useCart();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
@@ -12,10 +12,7 @@ export default function Cart() {
 
     const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
-    // Calc Delivery and Taxes
-    const deliveryFee = cartItems.length > 0 ? 4.99 : 0;
-    const taxes = cartItems.length > 0 ? parseFloat((parseFloat(totalPrice) * 0.33).toFixed(2)) : 0;
-    const finalTotal = (parseFloat(totalPrice) + deliveryFee + taxes).toFixed(2);
+    // Delivery and Taxes are now calculated in CartContext
 
     const handleCheckout = async () => {
         if (cartItems.length === 0) return;
