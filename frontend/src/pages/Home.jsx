@@ -20,13 +20,13 @@ export default function Home() {
                         to="/categoria/Seafood" 
                         className="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-gray-50 transition-colors"
                     >
-                        Ver platos de Seafood
+                        Ver platos de Marisco
                     </Link>
                     <Link 
                         to="/categoria/Chicken" 
                         className="px-6 py-3 bg-white text-primary border border-primary rounded-lg hover:bg-gray-50 transition-colors"
                     >
-                        Ver platos de Chicken
+                        Ver platos de Pollo
                     </Link>
                 </div>
             </div>
