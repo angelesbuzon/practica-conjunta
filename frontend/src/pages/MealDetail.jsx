@@ -68,10 +68,10 @@ const MealDetail = () => {
             portions: 4,
             price: parseFloat(meal.precio || '15.00'),
             originalPrice: parseFloat(meal.precio || '15.00') + 4,
-            discount: '15% Off',
+            discount: '15% Dto',
             deliveryInfo: {
-              urgency: 'Order within 2h 15m',
-              time: '7:00 PM today'
+              urgency: 'Pídelo en las próximas 2h 15m',
+              time: '19:00 de hoy'
             }
           }
         });

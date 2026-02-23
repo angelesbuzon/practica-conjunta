@@ -27,7 +27,7 @@ function CardProducto({ producto, isCategory = false }) {
   return (
     <article className="bg-surface-light dark:bg-surface-dark rounded-xl shadow-sm border border-gray-100 dark:border-gray-800 overflow-hidden flex flex-col card-hover-effect h-full">
       {/* Imagen del producto */}
-      <Link to={isCategory ? `/categoria/${strMeal}` : `/pedido/${idMeal}`} className="relative h-48 overflow-hidden group block">
+      <Link to={isCategory ? `/categoria/${strMeal}` : `/plato/${idMeal}`} className="relative h-48 overflow-hidden group block">
         <img 
           alt={strMeal} 
           className="w-full h-full object-cover transition-transform duration-700 group-hover:scale-110" 
@@ -52,7 +52,7 @@ function CardProducto({ producto, isCategory = false }) {
       <div className="p-5 flex flex-col flex-grow">
         {/* Título */}
         <div className="flex justify-between items-start mb-2">
-          <Link to={isCategory ? `/categoria/${strMeal}` : `/pedido/${idMeal}`}>
+          <Link to={isCategory ? `/categoria/${strMeal}` : `/plato/${idMeal}`}>
             <h2 className="text-xl font-bold text-gray-900 dark:text-white hover:text-primary cursor-pointer transition-colors line-clamp-1">
               {strMeal}
             </h2>

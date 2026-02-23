@@ -23,7 +23,7 @@ export const CartProvider = ({ children }) => {
       }
       
       // Si no existe, lo añadimos con cantidad qty
-      // Añadimos un precio mock de $10.00 si la API no lo trae
+      // Añadimos un precio mock de 10.00 € si la API no lo trae
       return [...prevItems, { ...meal, cantidad: qty, precio: meal.precio || "10.00" }];
     });
   };

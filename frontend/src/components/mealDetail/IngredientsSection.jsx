@@ -5,7 +5,7 @@ const IngredientsSection = ({ ingredients = [], pantryCheck }) => {
     <div>
       <h2 className="text-[26px] font-extrabold mb-8 text-[#1a1b24] flex items-center gap-3">
         {/* Usamos un check o inventory acorde a su icono visual. En su captura se ve un emoji o caja pequeñita */}
-        <span className="material-icons text-[#ef6c00] text-3xl">inventory_2</span> What's in the box
+        <span className="material-icons text-[#ef6c00] text-3xl">inventory_2</span> Qué incluye la caja
       </h2>
       
       {ingredients.length > 0 ? (
@@ -27,14 +27,14 @@ const IngredientsSection = ({ ingredients = [], pantryCheck }) => {
           ))}
         </div>
       ) : (
-        <p className="text-gray-500">No ingredients listed.</p>
+        <p className="text-gray-500">No hay ingredientes listados.</p>
       )}
 
       {pantryCheck && (
         <div className="mt-8 p-4 rounded-xl bg-[#fff8ef] border border-[#fef0dd]">
           <p className="text-[14px] text-gray-600 flex items-start gap-3">
             <span className="material-icons text-[#ef6c00] text-xl">info</span>
-            <span><strong className="text-[#1a1b24] font-extrabold">Pantry check:</strong> {pantryCheck}</span>
+            <span><strong className="text-[#1a1b24] font-extrabold">Revisa tu despensa:</strong> {pantryCheck}</span>
           </p>
         </div>
       )}

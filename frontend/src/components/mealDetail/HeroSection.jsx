@@ -4,14 +4,14 @@ const HeroSection = ({ imageSrc, imageAlt, isBestseller, rating, reviewsCount })
   return (
     <div className="relative aspect-video w-full overflow-hidden rounded-2xl shadow-xl group">
       <img
-        alt={imageAlt || "Recipe Hero Image"}
+        alt={imageAlt || "Imagen principal de la receta"}
         className="w-full h-full object-cover transform transition-transform duration-700 group-hover:scale-105"
-        src={imageSrc || "https://placehold.co/800x450/e2e8f0/64748b?text=Image+Not+Found"}
+        src={imageSrc || "https://placehold.co/800x450/e2e8f0/64748b?text=Imagen+No+Encontrada"}
       />
       <div className="absolute top-4 left-4 flex gap-2">
         {isBestseller && (
           <span className="flex items-center px-4 py-1.5 bg-white/95 text-[#ef6c00] backdrop-blur-sm rounded-full text-[13px] font-extrabold uppercase tracking-widest shadow-md">
-            Bestseller
+            Más vendido
           </span>
         )}
         <span className="flex items-center px-4 py-1.5 bg-white/95 dark:bg-black/90 backdrop-blur-sm rounded-full text-[14px] font-bold tracking-wider text-gray-800 dark:text-white shadow-md">

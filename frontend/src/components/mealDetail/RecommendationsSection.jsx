@@ -69,7 +69,7 @@ const RecommendationsSection = () => {
   if (loading) {
     return (
       <div className="mt-8 pt-8">
-        <h2 className="text-[22px] font-extrabold text-[#1a1b24] mb-6">Complete Your Meal</h2>
+        <h2 className="text-[22px] font-extrabold text-[#1a1b24] mb-6">Completa tu pedido</h2>
         <div className="flex gap-5 overflow-x-auto">
           {[1, 2, 3, 4].map(i => (
             <div key={i} className="min-w-[260px] h-[340px] bg-gray-100 animate-pulse rounded-[1.2rem]"></div>
@@ -82,7 +82,7 @@ const RecommendationsSection = () => {
   return (
     <div className="mt-8 pt-8">
       <div className="flex items-center justify-between mb-6">
-        <h2 className="text-[22px] font-extrabold text-[#1a1b24]">Complete Your Meal</h2>
+        <h2 className="text-[22px] font-extrabold text-[#1a1b24]">Completa tu pedido</h2>
         <div className="flex gap-2">
           <button className="w-8 h-8 rounded-full border border-orange-600 bg-orange-500 hover:bg-orange-700 text-white flex items-center justify-center transition-colors shadow-sm">
             <span className="material-icons text-sm">chevron_left</span>

@@ -19,8 +19,8 @@ const PurchaseCard = ({
         <div className="absolute -top-20 -right-20 w-64 h-64 bg-orange-50 rounded-full blur-3xl opacity-60"></div>
         
         <div className="hidden lg:block mb-6 relative z-10">
-          <h1 className="text-2xl font-extrabold text-gray-900 leading-tight">{title || 'Recipe Kit'}</h1>
-          <p className="text-sm font-medium text-gray-500 mt-2">Serves {servings || 1} people • {portions || 1} Generous portions</p>
+          <h1 className="text-2xl font-extrabold text-gray-900 leading-tight">{title || 'Kit de Receta'}</h1>
+          <p className="text-sm font-medium text-gray-500 mt-2">Para {servings || 1} personas • {portions || 1} Raciones generosas</p>
         </div>
         
         <div className="flex items-end gap-3 mb-8 relative z-10">
@@ -56,7 +56,7 @@ const PurchaseCard = ({
             <span className="material-icons text-blue-600 mt-0.5">local_shipping</span>
             <div>
               <p className="text-sm font-bold text-[#142354]">{deliveryInfo.urgency}</p>
-              <p className="text-sm text-blue-600 mt-0.5">Get it delivered by <span className="font-bold">{deliveryInfo.time}</span></p>
+              <p className="text-sm text-blue-600 mt-0.5">Recíbelo a las <span className="font-bold">{deliveryInfo.time}</span></p>
             </div>
           </div>
         )}
@@ -66,12 +66,12 @@ const PurchaseCard = ({
           onClick={() => onAddToCart && onAddToCart(quantity)}
           className="relative z-10 w-full bg-[#ef6c00] hover:bg-[#e65100] text-white font-bold text-xl py-4 flex items-center justify-center gap-2 rounded-2xl shadow-[0_8px_20px_rgba(239,108,0,0.3)] transform hover:-translate-y-0.5 transition-all"
         >
-          Add to Basket
+          Añadir a la Cesta
           <span className="material-icons text-lg">shopping_basket</span>
         </button>
         
         <p className="relative z-10 text-center text-sm text-gray-400 mt-5 flex items-center justify-center gap-1.5 font-medium">
-          <span className="material-icons text-base">verified_user</span> 100% Freshness Guarantee
+          <span className="material-icons text-base">verified_user</span> 100% Garantía de Frescura
         </p>
       </div>
 
