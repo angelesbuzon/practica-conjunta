@@ -132,7 +132,7 @@ const MealDetail = () => {
       <Breadcrumb category={recipeData.category} recipeName={recipeData.title}  />
       
       <div className="lg:grid lg:grid-cols-12 lg:gap-13 xl:gap-24">
-        {/* Left Column: Visuals & Content */}
+        {/* Columna Izquierda: Elementos Visuales y Contenido */}
         <div className="lg:col-span-8 space-y-8">
           <HeroSection 
             imageSrc={recipeData.imageSrc}
@@ -148,7 +148,7 @@ const MealDetail = () => {
           />
         </div>
 
-        {/* Right Column: Sticky Purchase Card */}
+        {/* Columna Derecha: Tarjeta de Compra Fija */}
         <div className="lg:col-span-4 mt-8 lg:mt-0">
           <PurchaseCard 
             title={recipeData.title + " Kit"}
