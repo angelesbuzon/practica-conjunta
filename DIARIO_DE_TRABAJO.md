@@ -94,6 +94,32 @@ La vista de detalle permite al usuario visualizar toda la información ampliada 
 - Refinamiento general del comportamiento de la aplicación.
 - Integración de vistas en `App.jsx`.
 
+### Sesión 4 - [20-02-2026] - Integración API TheMealDB y Visualización de Categorías
+
+**Responsable:** Desiree
+
+Integración completa del frontend React con la API externa TheMealDB a través del proxy de Symfony, con adaptación de componentes para mostrar datos dinámicos de categorías de comida.
+
+**Detalles técnicos implementados en esta sesión:**
+
+- Implementación del componente `Categoria.jsx` y `cardProducto.jsx` con su diseño.
+- Configuración de estilos de colores primarios con variables CSS adicionales para backgrounds y fuentes integradas.
+- Vista de categorías completamente funcional mostrando datos en tiempo real de la API TheMealDB, con interfaz responsive y diseño coherente con la identidad visual del proyecto.
+
+
+### Sesión 5 - [23-02-2026] - Enrutamiento Dinámico, Filtros y Carrito
+
+**Responsable:** Desirée
+
+Mejora de la experiencia de usuario en el frontend mediante la implementación de rutas dinámicas, filtros funcionales y la conexión con el carrito de compras.
+
+**Detalles técnicos implementados en esta sesión:**
+
+- **Enrutamiento Dinámico:** Uso de `useParams` para cargar dinámicamente los platos de una categoría específica (ej. `/categoria/Chicken`).
+- **Filtro de Precio Funcional:** Implementación de un slider interactivo que filtra en tiempo real los productos mostrados según su precio máximo.
+- **Integración del Carrito:** Conexión del botón "Añadir" en `CardProducto.jsx` con el estado global `CartContext`.
+
+
 ---
 
 _Este diario se actualizará con los progresos de cada sesión de trabajo._

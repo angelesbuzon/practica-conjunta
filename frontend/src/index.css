@@ -1,6 +1,13 @@
 @import "tailwindcss";
 
 @theme {
+  --color-primary: #F3731C; /* Color naranja principal de la marca */
+  --color-primary-dark: #D66317; /* Versión más oscura para hovers */
+  --color-background-light: #f8f8f6;
+  --color-background-dark: #221f10;
+  --color-deep-green: #1A3C34;
+  --color-deep-green-light: #2C5E52;
+  --font-display: "Work Sans", "sans-serif";
     --color-primary: #ef6c00;
     --color-primary-dark: #cc5c00;
     --color-background-light: #f8f8f6;

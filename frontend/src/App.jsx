@@ -2,6 +2,8 @@ import { BrowserRouter, Routes, Route } from 'react-router-dom';
 import { CartProvider } from './context/CartContext';
 import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home';
+import Categoria from './pages/Categoria';
+import OrderDetails from './pages/OrderDetails';
 import MealDetail from './pages/MealDetail';
 import Cart from './pages/Cart';
 import History from './pages/History';
@@ -20,6 +22,10 @@ function App() {
         <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/categoria" element={<Categoria />} />
+          <Route path="/categoria/:cat" element={<Categoria />} />
+          <Route path="/pedido/:id" element={<OrderDetails />} />
+          <Route path="/pedido" element={<OrderDetails />} />
           <Route path="/plato/:id" element={<MealDetail />} />
           <Route path="/plato" element={<MealDetail />} />
           <Route path="/cart" element={<Cart />} />
