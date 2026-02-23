@@ -151,7 +151,7 @@ const MealDetail = () => {
         {/* Columna Derecha: Tarjeta de Compra Fija */}
         <div className="lg:col-span-4 mt-8 lg:mt-0">
           <PurchaseCard 
-            title={recipeData.title + " Kit"}
+            title={recipeData.title}
             servings={recipeData.purchaseParams.servings}
             portions={recipeData.purchaseParams.portions}
             price={recipeData.purchaseParams.price}

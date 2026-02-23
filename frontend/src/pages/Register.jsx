@@ -39,10 +39,33 @@ const Register = () => {
             });
 
             if (response.ok) {
-                const data = await response.json();
-                login(data); // Auto-login immediately
-                setSuccess('¡Cuenta creada exitosamente! Redirigiendo...');
-                setTimeout(() => navigate('/'), 1500);
+                // Auto-login to establish backend session cookie
+                try {
+                    const loginResponse = await fetch('http://localhost:8000/api/login', {
+                        method: 'POST',
+                        headers: {
+                            'Content-Type': 'application/json',
+                        },
+                        credentials: 'include',
+                        body: JSON.stringify({ email: formData.email, password: formData.password })
+                    });
+                    
+                    if (loginResponse.ok) {
+                        const loginData = await loginResponse.json();
+                        login(loginData);
+                        setSuccess('¡Cuenta creada exitosamente! Redirigiendo...');
+                        setTimeout(() => navigate('/'), 1500);
+                    } else {
+                        throw new Error('No se pudo establecer sesión auto-login');
+                    }
+                } catch (loginErr) {
+                    console.error('Auto-login error:', loginErr);
+                    // Just fallback to frontend login state if backend session fails to establish automatically
+                    const data = await response.json();
+                    login(data); 
+                    setSuccess('¡Cuenta creada! Por favor inicia sesión de nuevo si tienes problemas.');
+                    setTimeout(() => navigate('/login'), 2000);
+                }
             } else {
                 const data = await response.json();
                 setError(data.error || 'No se pudo crear la cuenta');
@@ -71,7 +94,7 @@ const Register = () => {
                         <div className="max-w-md mb-12 animate-fade-in">
                             <h1 className="text-5xl font-bold mb-6 leading-tight">Empieza tu viaje <span className="text-primary">gastronómico</span>.</h1>
                             <p className="text-lg text-gray-200 font-light leading-relaxed">
-                                Crea tu cuenta para guardar recetas, ver tu historial de pedidos y recibir nuestras recomendaciones personalizadas.
+                                Crea tu cuenta para ver tu historial de pedidos y recibir nuestras recomendaciones personalizadas.
                             </p>
                         </div>
                     </div>
