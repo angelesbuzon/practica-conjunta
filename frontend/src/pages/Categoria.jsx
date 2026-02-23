@@ -6,6 +6,7 @@ function Categoria() {
   const { cat: categoryParam } = useParams(); // e.g., /categoria/Chicken
 
   const [productos, setProductos] = useState([]);
+  const [precioMaximo, setPrecioMaximo] = useState(30); // Estado para el filtro de precio
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -34,7 +35,7 @@ function Categoria() {
               strMeal: meal.strMeal,
               strMealThumb: meal.strMealThumb,
               strArea: categoryParam, // Usamos el nombre de la categoría como área
-              precio: meal.precio || parseFloat('12.99') // El proxy inyecta el precio, o usamos uno por defecto
+              precio: meal.precio ? parseFloat(meal.precio) : 12.99 // El proxy inyecta el precio, o usamos uno por defecto
             }));
             setProductos(platosFormateados);
           } else {
@@ -84,6 +85,9 @@ function Categoria() {
     );
   }
 
+  // Filtramos los productos basándonos en el precio máximo seleccionado
+  const productosFiltrados = productos.filter(producto => producto.precio <= precioMaximo);
+
   return (
     <main className="flex-grow max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-8 w-full">
       <div className="flex flex-col lg:flex-row gap-8">
@@ -108,7 +112,7 @@ function Categoria() {
                   type="range" 
                   min="0" 
                   max="50" 
-                  step="10"
+                  step="1"
                   defaultValue="30"
                   className="absolute top-0 left-0 w-full h-1 bg-transparent appearance-none cursor-pointer [&::-webkit-slider-thumb]:appearance-none [&::-webkit-slider-thumb]:w-4 [&::-webkit-slider-thumb]:h-4 [&::-webkit-slider-thumb]:rounded-full [&::-webkit-slider-thumb]:bg-white [&::-webkit-slider-thumb]:border-2 [&::-webkit-slider-thumb]:border-primary [&::-webkit-slider-thumb]:shadow [&::-moz-range-thumb]:w-4 [&::-moz-range-thumb]:h-4 [&::-moz-range-thumb]:rounded-full [&::-moz-range-thumb]:bg-white [&::-moz-range-thumb]:border-2 [&::-moz-range-thumb]:border-primary [&::-moz-range-thumb]:shadow"
                   onInput={(e) => {
@@ -117,6 +121,7 @@ function Categoria() {
                     // El círculo mide 16px, su centro está a 8px, y el borde a 2px del centro
                     e.target.previousElementSibling.style.width = `calc(${percent}% - ${percent === 0 ? 0 : percent === 100 ? 0 : 2}px)`;
                     e.target.parentElement.nextElementSibling.children[1].textContent = e.target.value + '€';
+                    setPrecioMaximo(Number(e.target.value));
                   }}
                 />
               </div>
@@ -131,33 +136,23 @@ function Categoria() {
 
         {/* Recipe Grid */}
         <section className="flex-grow">
-          <div className="mb-6 flex items-center justify-between">
+          <div className="mb-6 flex flex-col sm:flex-row sm:items-center justify-between gap-4">
+            <h1 className="text-2xl font-bold text-gray-900 dark:text-white">
+              {categoryParam ? `Platos de ${categoryParam}` : 'Categorías Disponibles'}
+            </h1>
             <p className="text-sm text-gray-500 dark:text-gray-400">
-              Mostrando <span className="font-semibold text-gray-900 dark:text-white">{productos.length} {categoryParam ? `platos de ${categoryParam}` : 'categorías'}</span> disponibles
+              Mostrando <span className="font-semibold text-gray-900 dark:text-white">{productosFiltrados.length}</span> {categoryParam ? 'platos' : 'categorías'}
             </p>
           </div>
           
           <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-6">
-            {productos.map(producto => (
-              <CardProducto key={producto.idMeal} producto={producto} />
+            {productosFiltrados.map(producto => (
+              <CardProducto 
+                key={producto.idMeal} 
+                producto={producto} 
+                isCategory={!categoryParam} 
+              />
             ))}
-          </div>
-
-          {/* Pagination */}
-          <div className="mt-12 flex justify-center">
-            <nav aria-label="Pagination" className="inline-flex rounded-lg shadow-sm -space-x-px">
-              <a className="relative inline-flex items-center px-4 py-2 rounded-l-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-surface-dark text-sm font-medium text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800" href="#">
-                <span className="material-icons text-base">chevron_left</span>
-              </a>
-              <a className="relative inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-700 bg-primary text-white text-sm font-medium" href="#">1</a>
-              <a className="relative inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-700 bg-white dark:bg-surface-dark text-sm font-medium text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800" href="#">2</a>
-              <a className="relative inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-700 bg-white dark:bg-surface-dark text-sm font-medium text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800" href="#">3</a>
-              <span className="relative inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-700 bg-white dark:bg-surface-dark text-sm font-medium text-gray-700">...</span>
-              <a className="relative inline-flex items-center px-4 py-2 border border-gray-200 dark:border-gray-700 bg-white dark:bg-surface-dark text-sm font-medium text-gray-700 hover:bg-gray-50 dark:hover:bg-gray-800" href="#">8</a>
-              <a className="relative inline-flex items-center px-4 py-2 rounded-r-lg border border-gray-200 dark:border-gray-700 bg-white dark:bg-surface-dark text-sm font-medium text-gray-500 hover:bg-gray-50 dark:hover:bg-gray-800" href="#">
-                <span className="material-icons text-base">chevron_right</span>
-              </a>
-            </nav>
           </div>
         </section>
       </div>
