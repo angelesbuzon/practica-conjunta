@@ -31,21 +31,4 @@ Todos los miembros han participado activamente en el desarrollo del Back-end, Fr
 
 Para ver el progreso diario y las tareas realizadas, consulta nuestro [Diario de Trabajo](DIARIO_DE_TRABAJO.md).
 
-## Documentación de Componentes
-
-### Componente Header (`Header.jsx`)
-
-**Hecho por Rubén**
-
-El encabezado principal de la aplicación es responsivo e incluye las siguientes características:
-
-- **Identidad Visual**: Logo y nombre del restaurante "Come y Calla" (adaptativo para móviles y escritorio).
-- **Buscador**: Barra de búsqueda para recetas e ingredientes. En la versión de escritorio está siempre visible, mientras que en móviles se despliega al tocar el menú.
-- **Área de Acciones**:
-    - Botón de perfil de usuario.
-    - Botón del carrito de la compra con un diseño en forma de pastilla, que muestra dinámicamente el importe total (`totalPrice`) y un indicador (`cartCount`) si hay productos añadidos.
-- **Interfaz Fija**: Se mantiene en la parte superior de la pantalla (`sticky`) con un fondo translúcido (`backdrop-blur`).
-
----
-
 _Escuela de Arte de Granada - Curso 2025/2026_

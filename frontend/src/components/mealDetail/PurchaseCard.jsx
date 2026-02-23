@@ -24,9 +24,9 @@ const PurchaseCard = ({
         </div>
         
         <div className="flex items-end gap-3 mb-8 relative z-10">
-          <span className="text-[2.5rem] leading-none font-extrabold text-[#ef6c00]">${price?.toFixed(2) || '0.00'}</span>
+          <span className="text-[2.5rem] leading-none font-extrabold text-[#ef6c00]">{(price * quantity)?.toFixed(2) || '0.00'} €</span>
           {originalPrice && (
-             <span className="text-gray-400 text-lg mb-1 line-through font-medium">${originalPrice.toFixed(2)}</span>
+             <span className="text-gray-400 text-lg mb-1 line-through font-medium">{(originalPrice * quantity).toFixed(2)} €</span>
           )}
           {discount && (
              <span className="mb-2 ml-auto px-2.5 py-1 bg-[#e8f5e9] text-[#2e7d32] text-[11px] font-black rounded uppercase tracking-wide">{discount}</span>

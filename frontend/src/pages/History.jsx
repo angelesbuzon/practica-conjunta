@@ -15,7 +15,8 @@ export default function History() {
                     headers: {
                         'Content-Type': 'application/json',
                         // Add Authorization header here later when Auth is fully integrated
-                    }
+                    },
+                    credentials: 'include'
                 });
 
                 if (!response.ok) {

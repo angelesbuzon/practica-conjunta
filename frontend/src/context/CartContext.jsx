@@ -8,7 +8,7 @@ export const CartProvider = ({ children }) => {
   const [cartItems, setCartItems] = useState([]);
 
   // Añadir un plato al carrito
-  const addToCart = (meal) => {
+  const addToCart = (meal, qty = 1) => {
     setCartItems((prevItems) => {
       // Comprobamos si el plato ya está en el carrito
       const existingItem = prevItems.find((item) => item.idMeal === meal.idMeal);
@@ -17,14 +17,14 @@ export const CartProvider = ({ children }) => {
         // Si existe, incrementamos su cantidad
         return prevItems.map((item) =>
           item.idMeal === meal.idMeal
-            ? { ...item, cantidad: item.cantidad + 1 }
+            ? { ...item, cantidad: item.cantidad + qty }
             : item
         );
       }
       
-      // Si no existe, lo añadimos con cantidad 1
+      // Si no existe, lo añadimos con cantidad qty
       // Añadimos un precio mock de $10.00 si la API no lo trae
-      return [...prevItems, { ...meal, cantidad: 1, precio: meal.precio || "10.00" }];
+      return [...prevItems, { ...meal, cantidad: qty, precio: meal.precio || "10.00" }];
     });
   };
 
@@ -51,11 +51,17 @@ export const CartProvider = ({ children }) => {
   // Calcular la cantidad total de items (para el globito rojo del Header)
   const cartCount = cartItems.reduce((total, item) => total + item.cantidad, 0);
 
-  // Calcular el precio total
-  const totalPrice = cartItems.reduce(
+  // Calcular el subtotal (solo el coste de los platos)
+  const subtotal = cartItems.reduce(
     (total, item) => total + (parseFloat(item.precio) * item.cantidad),
     0
-  ).toFixed(2);
+  );
+
+  // Calcular Gastos de Envío, Impuestos y Total Final
+  const deliveryFee = cartItems.length > 0 ? 4.99 : 0;
+  const taxes = cartItems.length > 0 ? parseFloat((subtotal * 0.33).toFixed(2)) : 0;
+  const finalTotal = (subtotal + deliveryFee + taxes).toFixed(2);
+  const totalPrice = subtotal.toFixed(2); // Mantenemos totalPrice como subtotal por si se necesita
 
   return (
     <CartContext.Provider value={{
@@ -64,7 +70,10 @@ export const CartProvider = ({ children }) => {
       removeFromCart,
       clearCart,
       cartCount,
-      totalPrice
+      totalPrice, // Subtotal
+      deliveryFee,
+      taxes,
+      finalTotal // Total real a pagar
     }}>
       {children}
     </CartContext.Provider>

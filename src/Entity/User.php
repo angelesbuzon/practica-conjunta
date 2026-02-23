@@ -43,8 +43,8 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255)]
     private ?string $nombre = null;
 
-    #[ORM\Column]
-    private ?int $telefono = null;
+    #[ORM\Column(length: 20, nullable: true)]
+    private ?string $telefono = null;
 
     #[ORM\Column(length: 255)]
     private ?string $direccion = null;
@@ -124,7 +124,7 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     public function __serialize(): array
     {
         $data = (array) $this;
-        $data["\0".self::class."\0password"] = hash('crc32c', $this->password);
+        $data["\0" . self::class . "\0password"] = hash('crc32c', $this->password);
 
         return $data;
     }
@@ -171,12 +171,12 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
         return $this;
     }
 
-    public function getTelefono(): ?int
+    public function getTelefono(): ?string
     {
         return $this->telefono;
     }
 
-    public function setTelefono(int $telefono): static
+    public function setTelefono(?string $telefono): static
     {
         $this->telefono = $telefono;
 
