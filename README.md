@@ -31,9 +31,4 @@ Todos los miembros han participado activamente en el desarrollo del Back-end, Fr
 
 Para ver el progreso diario y las tareas realizadas, consulta nuestro [Diario de Trabajo](DIARIO_DE_TRABAJO.md).
 
-## Documentación de Componentes
-
-
----
-
 _Escuela de Arte de Granada - Curso 2025/2026_

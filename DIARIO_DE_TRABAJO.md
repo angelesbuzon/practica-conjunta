@@ -67,13 +67,14 @@ Desarrollo e integración de componentes funcionales e interfaces de usuario ava
     - Botón del carrito de la compra con un diseño en forma de pastilla, que muestra dinámicamente el importe total (`totalPrice`) y un indicador (`cartCount`) si hay productos añadidos.
 - **Interfaz Fija**: Se mantiene en la parte superior de la pantalla (`sticky`) con un fondo translúcido (`backdrop-blur`).
 
-### Sesión 4 - [20-02-2026] - Frontend React: Componentes Header y OrderDetails
+### Sesión 4 - [20-02-2026]
+
+**Responsable:** Rubén
 
 #### Vista de Detalles de Pedido (`OrderDetails.jsx`)
 
 La vista de detalle permite al usuario visualizar toda la información ampliada de un platillo específico, comunicándose en tiempo real con el servidor:
 
-- **Integración con TheMealDB**: La vista realiza una llamada de datos (`fetch`) al backend de Symfony, que actúa como proxy hacia _TheMealDB_, inyectando automáticamente precios estandarizados al frontend.
 - **Componentización modular**:
     - `HeroSection`: Muestra la foto principal del plato, junto con la nota de reviews y una etiqueta dinámica de _Bestseller_.
     - `InfoHeader`: Cabecero descriptivo con tiempo de preparación, calorías y dificultad.
@@ -81,6 +82,17 @@ La vista de detalle permite al usuario visualizar toda la información ampliada 
     - `PurchaseCard`: Una tarjeta de compra flotante responsiva con los acentos corporativos naranjas, listando precios, descuentos, selector de porciones y tiempo estimado de entrega.
     - `RecommendationsSection`: Un carrusel estético horizontal ('snap-x') de productos complementarios simulados de apariencia moderna (fondos limpios).
 - **Control de Errores**: Cuenta con pantallas limpias de `loading` (rueda giratoria) e interfaz protectora en caso de que la respuesta del API tarde, esté vacía o el backend apague su conexión (Internal Server Error / Error 500).
+
+**Responsable:** Pepe
+
+**Detalles de las tareas:**
+
+- Planteamiento del uso de la librería `react-router` para la gestión de vistas.
+- Planteamiento del control de información de API a través de un controlador en Symfony.
+- Creación de la vista del carrito (`Cart.jsx`).
+- Resolución de los primeros conflictos en GitHub.
+- Refinamiento general del comportamiento de la aplicación.
+- Integración de vistas en `App.jsx`.
 
 ---
 

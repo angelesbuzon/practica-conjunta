@@ -1,11 +1,13 @@
 import React, { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import logoUrl from '../img/logo.png';
 
 // Componente del Encabezado (Header)
 const Header = () => {
 const { cartCount, finalTotal } = useCart();
+const { user } = useAuth();
 // Estado para controlar si el buscador movil esta abierto
 const [isMenuOpen, setIsMenuOpen] = useState(false);
 
@@ -40,8 +42,8 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
 
           {/* Iconos de acciones (Perfil, Carrito, Menu) */}
           <div className="flex items-center gap-4">
-            {/* Perfil de usuario (Historial MOCKEADO ahora apuntará a history) */}
-            <Link to="/history" className="p-2 rounded-full hover:bg-primary/10 transition-colors relative group">
+            {/* Perfil de usuario dinámico según estado de autenticación */}
+            <Link to={user ? "/profile" : "/register"} className="p-2 rounded-full hover:bg-primary/10 transition-colors relative group">
               <span className="material-icons text-black group-hover:text-primary active:text-primary transition-colors">person_outline</span>
             </Link>
 
