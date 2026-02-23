@@ -1,22 +1,60 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useCart } from '../context/CartContext';
 import { useNavigate, Link } from 'react-router-dom';
+import { useAuth } from '../context/AuthContext';
 
 export default function Cart() {
     const { cartItems, removeFromCart, addToCart, clearCart, totalPrice, deliveryFee, taxes, finalTotal, cartCount } = useCart();
+    const { user } = useAuth();
     const [loading, setLoading] = useState(false);
     const [error, setError] = useState(null);
     const [successMessage, setSuccessMessage] = useState(null);
     const [promoCode, setPromoCode] = useState('');
+    
+    // Address Selection State
+    const [addressType, setAddressType] = useState('registered');
+    const [customAddress, setCustomAddress] = useState('');
+    const [addressError, setAddressError] = useState(null);
+
+    // Payment Selection State
+    const [paymentMethod, setPaymentMethod] = useState('Tarjeta');
+
     const navigate = useNavigate();
 
     const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
     // Delivery and Taxes are now calculated in CartContext
+    
+    // Initialize address selection based on user auth
+    useEffect(() => {
+        if (!user || !user.direccion) {
+            setAddressType('custom');
+        } else {
+            setAddressType('registered');
+        }
+    }, [user]);
 
     const handleCheckout = async () => {
         if (cartItems.length === 0) return;
         
+        // Validate Address
+        let deliveryAddress = '';
+        setAddressError(null);
+        
+        if (addressType === 'registered') {
+             if (!user || !user.direccion) {
+                 setAddressError('Por favor, selecciona o introduce una dirección de entrega.');
+                 return;
+             }
+             deliveryAddress = user.direccion;
+        } else {
+             if (!customAddress.trim()) {
+                 setAddressError('Por favor, introduce una dirección de entrega.');
+                 return;
+             }
+             deliveryAddress = customAddress;
+        }
+
         setLoading(true);
         setError(null);
 
@@ -26,9 +64,11 @@ export default function Cart() {
                 headers: {
                     'Content-Type': 'application/json'
                 },
+                credentials: 'include',
                 body: JSON.stringify({
                     items: cartItems,
-                    metodo_pago: 'Tarjeta' // Default pay method
+                    metodo_pago: paymentMethod,
+                    direccion_envio: deliveryAddress
                 })
             });
 
@@ -39,9 +79,7 @@ export default function Cart() {
 
             setSuccessMessage("¡Pedido realizado con éxito!");
             clearCart();
-            setTimeout(() => {
-                navigate('/history');
-            }, 3000);
+            // Removed automatic redirect to show confirmation view
 
         } catch (err) {
             setError(err.message);
@@ -65,13 +103,29 @@ export default function Cart() {
 
     if (successMessage) {
         return (
-                            <main className="grow flex items-center justify-center py-20 px-4">
-                <div className="bg-white dark:bg-stone-900 p-10 rounded-2xl shadow-lg border border-stone-100 dark:border-stone-800 text-center max-w-lg w-full">
-                    <span className="material-icons text-6xl text-primary mb-6 block">check_circle</span>
-                    <h2 className="text-3xl font-bold text-deep-green dark:text-white mb-4">{successMessage}</h2>
-                    <p className="text-stone-500 dark:text-stone-400">Te estamos redirigiendo a tu historial de pedidos...</p>
-                    <div className="mt-8">
-                        <div className="w-12 h-12 border-4 border-primary border-t-transparent rounded-full animate-spin mx-auto"></div>
+            <main className="grow flex items-center justify-center py-20 px-4 bg-gray-50 min-h-[calc(100vh-80px)]">
+                <div className="bg-white p-12 rounded-3xl shadow-xl border border-stone-100 text-center max-w-xl w-full">
+                    <div className="w-24 h-24 bg-green-100 rounded-full flex items-center justify-center mx-auto mb-8">
+                        <span className="material-icons text-6xl text-green-500">check_circle</span>
+                    </div>
+                    <h2 className="text-4xl font-extrabold text-gray-900 tracking-tight mb-4">{successMessage}</h2>
+                    <p className="text-lg text-gray-500 mb-10">Tu pedido ha sido procesado y está en preparación. ¡Gracias por confiar en nosotros!</p>
+                    
+                    <div className="flex flex-col sm:flex-row gap-4 justify-center">
+                        <Link 
+                            to="/history"
+                            className="bg-primary text-white py-3 px-8 rounded-xl font-bold text-lg hover:brightness-110 transition-all flex items-center justify-center gap-2 shadow-md shadow-primary/20"
+                        >
+                            <span className="material-icons text-sm">receipt_long</span>
+                            Ir al Historial de Pedidos
+                        </Link>
+                        <Link 
+                            to="/"
+                            className="bg-stone-100 text-gray-800 py-3 px-8 rounded-xl font-bold text-lg hover:bg-stone-200 transition-all flex items-center justify-center gap-2"
+                        >
+                            <span className="material-icons text-sm">restaurant_menu</span>
+                            Volver al Menú
+                        </Link>
                     </div>
                 </div>
             </main>
@@ -233,6 +287,133 @@ export default function Cart() {
                                     Aplicar
                                 </button>
                             </div>
+                        </div>
+
+                        {/* Delivery Address Selection */}
+                        <div className="mb-6 bg-gray-50 dark:bg-stone-800/50 p-4 rounded-xl border border-stone-200 dark:border-stone-700">
+                             <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-4">
+                                <span className="material-icons text-primary/80 text-[20px]">local_shipping</span> 
+                                Dirección de Entrega
+                             </h3>
+                             
+                             <div className="space-y-3">
+                                <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${!user || !user.direccion ? 'opacity-50 cursor-not-allowed' : addressType === 'registered' ? 'bg-primary/5 border-primary' : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700'}`}>
+                                    <div className="flex items-center h-5">
+                                        <input 
+                                            type="radio" 
+                                            name="deliveryAddress" 
+                                            value="registered" 
+                                            className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary"
+                                            checked={addressType === 'registered'}
+                                            onChange={() => setAddressType('registered')}
+                                            disabled={!user || !user.direccion}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col">
+                                        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">Mi dirección principal</span>
+                                        <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">
+                                            {user && user.direccion ? user.direccion : 'No tienes dirección registrada'}
+                                        </span>
+                                    </div>
+                                </label>
+
+                                <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${addressType === 'custom' ? 'bg-primary/5 border-primary' : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700'}`}>
+                                    <div className="flex items-center h-5">
+                                        <input 
+                                            type="radio" 
+                                            name="deliveryAddress" 
+                                            value="custom" 
+                                            className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary"
+                                            checked={addressType === 'custom'}
+                                            onChange={() => setAddressType('custom')}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col w-full">
+                                        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100 mb-2">Otra dirección</span>
+                                        {addressType === 'custom' && (
+                                            <input 
+                                                type="text"
+                                                placeholder="Ej. Calle Mayor 12, 3ºA, Madrid"
+                                                className="w-full text-sm border-stone-200 dark:border-stone-600 rounded-md focus:ring-primary focus:border-primary px-3 py-2 bg-white dark:bg-stone-900"
+                                                value={customAddress}
+                                                onChange={(e) => setCustomAddress(e.target.value)}
+                                                autoFocus
+                                            />
+                                        )}
+                                    </div>
+                                </label>
+                                
+                                {addressError && (
+                                    <p className="text-red-500 text-xs mt-1 animate-pulse flex items-center gap-1">
+                                        <span className="material-icons text-[14px]">error_outline</span>
+                                        {addressError}
+                                    </p>
+                                )}
+                             </div>
+                        </div>
+
+                        {/* Payment Method Selection */}
+                        <div className="mb-6 bg-gray-50 dark:bg-stone-800/50 p-4 rounded-xl border border-stone-200 dark:border-stone-700">
+                             <h3 className="font-bold text-gray-900 dark:text-white flex items-center gap-2 mb-4">
+                                <span className="material-icons text-primary/80 text-[20px]">payment</span> 
+                                Método de Pago
+                             </h3>
+                             
+                             <div className="space-y-3">
+                                <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'Tarjeta' ? 'bg-primary/5 border-primary' : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700'}`}>
+                                    <div className="flex items-center h-5">
+                                        <input 
+                                            type="radio" 
+                                            name="paymentMethod" 
+                                            value="Tarjeta" 
+                                            className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary"
+                                            checked={paymentMethod === 'Tarjeta'}
+                                            onChange={() => setPaymentMethod('Tarjeta')}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col flex-grow">
+                                        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">Tarjeta de Crédito / Débito</span>
+                                        <span className="text-xs text-gray-500 dark:text-gray-400 mt-1 flex gap-2">
+                                            <span className="material-icons text-sm">credit_card</span>
+                                            Pago seguro en Checkout
+                                        </span>
+                                    </div>
+                                </label>
+
+                                <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'PayPal' ? 'bg-primary/5 border-primary' : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700'}`}>
+                                    <div className="flex items-center h-5">
+                                        <input 
+                                            type="radio" 
+                                            name="paymentMethod" 
+                                            value="PayPal" 
+                                            className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary"
+                                            checked={paymentMethod === 'PayPal'}
+                                            onChange={() => setPaymentMethod('PayPal')}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col flex-grow">
+                                        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">PayPal</span>
+                                        <span className="text-xs text-info dark:text-blue-400 mt-1">Conecta con tu cuenta</span>
+                                    </div>
+                                </label>
+                                
+                                <label className={`flex items-start gap-3 p-3 rounded-lg border cursor-pointer transition-colors ${paymentMethod === 'ApplePay' ? 'bg-primary/5 border-primary' : 'bg-white dark:bg-stone-800 border-stone-200 dark:border-stone-700'}`}>
+                                    <div className="flex items-center h-5">
+                                        <input 
+                                            type="radio" 
+                                            name="paymentMethod" 
+                                            value="ApplePay" 
+                                            className="w-4 h-4 text-primary bg-gray-100 border-gray-300 focus:ring-primary"
+                                            checked={paymentMethod === 'ApplePay'}
+                                            onChange={() => setPaymentMethod('ApplePay')}
+                                        />
+                                    </div>
+                                    <div className="flex flex-col flex-grow">
+                                        <span className="text-sm font-semibold text-gray-900 dark:text-gray-100">Apple Pay / Google Pay</span>
+                                        <span className="text-xs text-gray-500 dark:text-gray-400 mt-1">Pago rápido desde tu dispositivo</span>
+                                    </div>
+                                </label>
+                             </div>
                         </div>
 
                         {/* Divider */}

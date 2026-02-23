@@ -41,7 +41,7 @@ const PurchaseCard = ({
           >
             <span className="material-icons">remove</span>
           </button>
-          <span className="font-extrabold text-lg text-gray-900">{quantity} Kit{quantity > 1 ? 's' : ''}</span>
+          <span className="font-extrabold text-lg text-gray-900">{quantity}</span>
           <button 
             onClick={() => setQuantity(quantity + 1)}
             className="w-12 h-12 flex items-center justify-center rounded-xl bg-white shadow-sm text-gray-700 hover:text-[#ef6c00] hover:shadow-md transition-all"

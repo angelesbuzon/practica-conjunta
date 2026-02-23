@@ -8,7 +8,7 @@ Este documento recoge el seguimiento diario del trabajo realizado por el equipo 
 
 Se establecieron los grupos de trabajo y se dió inicio al proyecto utilizando el framework Symfony.
 
-### Sesión 2 - [17-02-2026] - Arquitectura, Seguridad y Funcionalidad Base
+### Sesión 2 - [17-02-2026]
 
 Se ha llevado a cabo el diseño y modelado relacional del sistema, traduciendo el esquema entidad-relación en entidades de Doctrine para estructurar la base de datos. Sobre esta arquitectura, se implementaron los módulos CRUD para la gestión de datos y se configuró el componente de seguridad de Symfony, desarrollando un flujo completo de autenticación y registro de usuarios bajo estándares de persistencia profesional.
 
@@ -29,7 +29,7 @@ Se ha llevado a cabo el diseño y modelado relacional del sistema, traduciendo e
 
 **Nota:** Estas dos sesiones han sido realizadas al completo en conjunto por los cuatro integrantes.
 
-### Sesión 3 - [19-02-2026] - Frontend React y Componente Footer
+### Sesión 3 - [19-02-2026]
 
 **Responsable:** Desiree
 
@@ -94,8 +94,6 @@ La vista de detalle permite al usuario visualizar toda la información ampliada 
 - Refinamiento general del comportamiento de la aplicación.
 - Integración de vistas en `App.jsx`.
 
-### Sesión 4 - [20-02-2026] - Integración API TheMealDB y Visualización de Categorías
-
 **Responsable:** Desiree
 
 Integración completa del frontend React con la API externa TheMealDB a través del proxy de Symfony, con adaptación de componentes para mostrar datos dinámicos de categorías de comida.
@@ -106,8 +104,7 @@ Integración completa del frontend React con la API externa TheMealDB a través 
 - Configuración de estilos de colores primarios con variables CSS adicionales para backgrounds y fuentes integradas.
 - Vista de categorías completamente funcional mostrando datos en tiempo real de la API TheMealDB, con interfaz responsive y diseño coherente con la identidad visual del proyecto.
 
-
-### Sesión 5 - [23-02-2026] - Enrutamiento Dinámico, Filtros y Carrito
+### Sesión 5 - [23-02-2026]
 
 **Responsable:** Desirée
 
@@ -119,6 +116,16 @@ Mejora de la experiencia de usuario en el frontend mediante la implementación d
 - **Filtro de Precio Funcional:** Implementación de un slider interactivo que filtra en tiempo real los productos mostrados según su precio máximo.
 - **Integración del Carrito:** Conexión del botón "Añadir" en `CardProducto.jsx` con el estado global `CartContext`.
 
+**Responsable:** Pepe
+
+**Desarrollo del Sistema de Autenticación, Perfil y Checkout Avanzado:**
+
+- **Sistema de Usuarios:** Creación del flujo de Login y Registro desde cero (en colaboración con Desirée).
+- **Gestión de Perfil:** Creación de la vista de usuario para modificar datos personales y visualizar historiales.
+- **Seguridad e Integración:** Implementación estricta de la seguridad de datos de usuario a través de cookies de sesión persistentes entre Vite y Symfony (`credentials: 'include'`).
+- **Fixtures y Base de Datos:** Creación de _fixtures_ de prueba y resolución de bugs de concurrencia de sesiones.
+- **Persistencia de Compras:** Implementación de la creación materializada de compras en la base de datos (`Pedido` y `PlatoPedido`).
+- **Refinamiento del Proceso de Pedido:** Mejora total de la vista del carrito, incorporando la capacidad de seleccionar la dirección de envío del usuario, elegir entre distintos métodos de pago interactivos y confirmación visual del pedido.
 
 ---
 

@@ -58,7 +58,7 @@ const Login = () => {
                             </div>
                             <h1 className="text-5xl font-bold mb-6 leading-tight">Ingredientes frescos, <br/> maestría <span className="text-primary">culinaria</span>.</h1>
                             <p className="text-lg text-gray-200 font-light leading-relaxed">
-                                Únete a miles de entusiastas de la comida descubriendo nuevas recetas y recibiendo ingredientes frescos de la granja en su puerta.
+                                Únete a miles de entusiastas de la comida descubriendo nuevos platos y recibiendo ingredientes frescos de la granja en su puerta.
                             </p>
                             <div className="mt-8 flex items-center gap-4 pt-8 border-t border-white/10">
                                 <img alt="Chef Portrait" className="w-12 h-12 rounded-full border-2 border-primary object-cover" src="https://images.unsplash.com/photo-1583394838336-acd977736f90?ixlib=rb-4.0.3&auto=format&fit=crop&w=100&q=80"/>

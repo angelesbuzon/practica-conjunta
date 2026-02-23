@@ -82,7 +82,7 @@ export default function History() {
                                     <div className="bg-gray-50 border-b border-gray-100 p-6 flex flex-wrap justify-between items-center gap-4">
                                         <div>
                                             <p className="text-sm font-bold text-gray-500 uppercase tracking-wider mb-1">
-                                                Pedido #{order.order_id}
+                                                Pedido #{orderIdx + 1}
                                             </p>
                                             <div className="flex items-center gap-2 text-gray-600">
                                                 <span className="material-icons text-sm">location_on</span>
