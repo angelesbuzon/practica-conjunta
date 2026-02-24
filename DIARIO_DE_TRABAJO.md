@@ -129,4 +129,34 @@ Mejora de la experiencia de usuario en el frontend mediante la implementación d
 
 ---
 
+### Sesión 6 - [24-02-2026]
+
+**Responsable:** Rubén
+
+Implementación completa de la funcionalidad de **Favoritos** para usuarios autenticados, permitiendo guardar y gestionar platos preferidos desde cualquier vista del catálogo.
+
+**Detalles técnicos implementados en esta sesión:**
+
+- **Backend (Symfony):**
+    - Creación de 3 endpoints REST en `ApiController.php`:
+        - `GET /api/favorites` — Listado de platos favoritos del usuario autenticado.
+        - `POST /api/favorites/{apiId}` — Añadir un plato a favoritos (con creación automática del registro `Plato` en BD si no existe).
+        - `DELETE /api/favorites/{apiId}` — Eliminar un plato de favoritos.
+    - Configuración de regla de acceso en `security.yaml` (`/api/favorites` → `ROLE_USER`).
+    - Actualización del esquema de base de datos para añadir la columna `api_id` a la tabla `plato`.
+
+- **Frontend (React):**
+    - Creación del contexto `FavoritesContext.jsx` con:
+        - Carga automática de favoritos al iniciar sesión.
+        - Toggle optimista con rollback automático en caso de error del servidor.
+    - Modificación de `CardProducto.jsx`: el icono de corazón ahora es funcional, mostrando estado visual diferenciado (relleno rojo si es favorito, borde gris si no lo es). Si el usuario no ha iniciado sesión, se redirige a `/login`.
+    - Creación de la página `Favorites.jsx` (`/favorites`) con grid de platos favoritos y estado vacío ilustrativo.
+    - Integración en `App.jsx` con `FavoritesProvider` y nueva ruta `/favorites`.
+    - Añadida tarjeta de acceso directo "Mis Favoritos" en la sidebar del perfil (`Profile.jsx`).
+
+- **Sincronización con repositorio:**
+    - Actualización de la rama `Detalle-pedidos` con los últimos cambios del repositorio principal (`upstream/main`).
+
+---
+
 _Este diario se actualizará con los progresos de cada sesión de trabajo._

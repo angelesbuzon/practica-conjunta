@@ -42,7 +42,7 @@ export default function Profile() {
         setMessage({ type: '', text: '' });
 
         try {
-            const response = await fetch('http://localhost:8000/api/profile', {
+            const response = await fetch('http://localhost:8001/api/profile', {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
@@ -171,6 +171,14 @@ export default function Profile() {
                             </div>
                             <h3 className="text-lg font-bold text-gray-900 mb-1">Historial de Pedidos</h3>
                             <p className="text-sm text-gray-500">Revisa tus compras anteriores y el estado de tus pedidos.</p>
+                        </Link>
+
+                        <Link to="/favorites" className="block bg-white rounded-2xl shadow-sm border border-gray-100 p-6 hover:border-red-400 hover:shadow-md transition-all group cursor-pointer">
+                            <div className="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center mb-4 group-hover:bg-red-500 transition-colors">
+                                <span className="material-icons text-red-500 group-hover:text-white transition-colors">favorite</span>
+                            </div>
+                            <h3 className="text-lg font-bold text-gray-900 mb-1">Mis Favoritos</h3>
+                            <p className="text-sm text-gray-500">Accede rápidamente a tus platos favoritos guardados.</p>
                         </Link>
                         
                         <div className="bg-primary/5 rounded-2xl border border-primary/10 p-6">

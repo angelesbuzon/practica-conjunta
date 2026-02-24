@@ -1,8 +1,13 @@
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
+import { useFavorites } from '../context/FavoritesContext';
 
 function CardProducto({ producto, isCategory = false }) {
   const { addToCart } = useCart();
+  const { user } = useAuth();
+  const { isFavorite, toggleFavorite } = useFavorites();
+  const navigate = useNavigate();
 
   // Adaptamos los datos de la API de TheMealDB al formato del componente
   const {
@@ -13,6 +18,8 @@ function CardProducto({ producto, isCategory = false }) {
     precio = 15.99
   } = producto || {};
 
+  const liked = isFavorite(idMeal);
+
   const handleAddToCart = () => {
     // Añadimos el producto al carrito usando el contexto
     addToCart(producto);
@@ -20,8 +27,11 @@ function CardProducto({ producto, isCategory = false }) {
   };
 
   const handleToggleFavorite = () => {
-    // Función para marcar/desmarcar favorito (pendiente de implementar)
-    console.log('Toggle favorito:', producto);
+    if (!user) {
+      navigate('/login');
+      return;
+    }
+    toggleFavorite(producto);
   };
 
   return (
@@ -40,12 +50,20 @@ function CardProducto({ producto, isCategory = false }) {
         </div>
         
         {/* Botón de favorito */}
-        <button 
-          onClick={(e) => { e.preventDefault(); handleToggleFavorite(); }}
-          className="absolute top-3 right-3 p-2 bg-white/90 dark:bg-black/80 backdrop-blur-sm rounded-full text-gray-400 hover:text-red-500 transition-colors z-10"
-        >
-          <span className="material-icons text-sm">favorite_border</span>
-        </button>
+        {!isCategory && (
+          <button 
+            onClick={(e) => { e.preventDefault(); handleToggleFavorite(); }}
+            className={`absolute top-3 right-3 p-2 backdrop-blur-sm rounded-full transition-all z-10 ${
+              liked
+                ? 'bg-red-500 text-white shadow-lg shadow-red-500/30 scale-110'
+                : 'bg-white/90 dark:bg-black/80 text-gray-400 hover:text-red-500'
+            }`}
+          >
+            <span className="material-icons text-sm">
+              {liked ? 'favorite' : 'favorite_border'}
+            </span>
+          </button>
+        )}
       </Link>
 
       {/* Contenido de la tarjeta */}
