@@ -127,6 +127,16 @@ Mejora de la experiencia de usuario en el frontend mediante la implementación d
 - **Persistencia de Compras:** Implementación de la creación materializada de compras en la base de datos (`Pedido` y `PlatoPedido`).
 - **Refinamiento del Proceso de Pedido:** Mejora total de la vista del carrito, incorporando la capacidad de seleccionar la dirección de envío del usuario, elegir entre distintos métodos de pago interactivos y confirmación visual del pedido.
 
+### Sesión 6 - [24-02-2026]
+
+**Responsable:** Desirée
+
+**Mejoras de Navegación y Experiencia de Usuario:**
+
+- **Migas de Pan (Breadcrumbs) Funcionales:** Implementación de navegación interactiva en la vista de detalle del plato (`MealDetail.jsx` y `Breadcrumb.jsx`). Ahora los usuarios pueden volver fácilmente a la página principal o a la categoría específica del plato actual mediante enlaces dinámicos, mejorando la usabilidad y el flujo de navegación de la aplicación.
+- **Corrección de Rutas:** Actualización de los enlaces en las tarjetas de productos (`CardProducto.jsx`) para apuntar correctamente a la nueva ruta de detalle de platos (`/plato/:id`), resolviendo problemas de navegación tras la reestructuración del proyecto.
+
 ---
+
 
 _Este diario se actualizará con los progresos de cada sesión de trabajo._
