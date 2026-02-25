@@ -25,6 +25,9 @@ class Plato
     #[ORM\Column(length: 255)]
     private ?string $precio = null;
 
+    #[ORM\Column(length: 255, nullable: true)]
+    private ?string $api_id = null;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -74,6 +77,18 @@ class Plato
     public function setPrecio(string $precio): static
     {
         $this->precio = $precio;
+
+        return $this;
+    }
+
+    public function getApiId(): ?string
+    {
+        return $this->api_id;
+    }
+
+    public function setApiId(?string $api_id): static
+    {
+        $this->api_id = $api_id;
 
         return $this;
     }

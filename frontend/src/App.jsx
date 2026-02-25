@@ -1,20 +1,41 @@
-import { useState } from 'react';
 import { BrowserRouter, Routes, Route } from 'react-router-dom';
+import { CartProvider } from './context/CartContext';
+import { AuthProvider } from './context/AuthContext';
 import Home from './pages/Home';
-import Footer from './components/Footer'
-import Header from './components/Header'
+import Categoria from './pages/Categoria';
+import MealDetail from './pages/MealDetail';
+import Cart from './pages/Cart';
+import History from './pages/History';
+import Login from './pages/Login';
+import Register from './pages/Register';
+import Profile from './pages/Profile';
+import Footer from './components/Footer';
+import Header from './components/Header';
 
 function App() {
   return (
-    <BrowserRouter>
-      <Header />
-      <main>
+    <AuthProvider>
+      <CartProvider>
+        <BrowserRouter>
+        <Header />
+        <main>
         <Routes>
           <Route path="/" element={<Home />} />
+          <Route path="/categoria" element={<Categoria />} />
+          <Route path="/categoria/:cat" element={<Categoria />} />
+          <Route path="/plato/:id" element={<MealDetail />} />
+          <Route path="/plato" element={<MealDetail />} />
+          <Route path="/cart" element={<Cart />} />
+          <Route path="/history" element={<History />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/register" element={<Register />} />
         </Routes>
       </main>
       <Footer />
     </BrowserRouter>
+    </CartProvider>
+    </AuthProvider>
   )
 }
 

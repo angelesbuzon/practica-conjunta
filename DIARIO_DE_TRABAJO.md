@@ -8,7 +8,7 @@ Este documento recoge el seguimiento diario del trabajo realizado por el equipo 
 
 Se establecieron los grupos de trabajo y se dió inicio al proyecto utilizando el framework Symfony.
 
-### Sesión 2 - [17-02-2026] - Arquitectura, Seguridad y Funcionalidad Base
+### Sesión 2 - [17-02-2026]
 
 Se ha llevado a cabo el diseño y modelado relacional del sistema, traduciendo el esquema entidad-relación en entidades de Doctrine para estructurar la base de datos. Sobre esta arquitectura, se implementaron los módulos CRUD para la gestión de datos y se configuró el componente de seguridad de Symfony, desarrollando un flujo completo de autenticación y registro de usuarios bajo estándares de persistencia profesional.
 
@@ -29,7 +29,7 @@ Se ha llevado a cabo el diseño y modelado relacional del sistema, traduciendo e
 
 **Nota:** Estas dos sesiones han sido realizadas al completo en conjunto por los cuatro integrantes.
 
-### Sesión 3 - [19-02-2026] - Frontend React y Componente Footer
+### Sesión 3 - [19-02-2026]
 
 **Responsable:** Desiree
 
@@ -69,5 +69,6 @@ Inicio del desarrollo del frontend en React con la implementación del component
     - Creación de clases personalizadas Tailwind para la paleta de colores.
 
 ---
+
 
 _Este diario se actualizará con los progresos de cada sesión de trabajo._

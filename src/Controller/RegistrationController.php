@@ -11,34 +11,48 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\PasswordHasher\Hasher\UserPasswordHasherInterface;
 use Symfony\Component\Routing\Attribute\Route;
 
+use Symfony\Component\HttpFoundation\JsonResponse;
+
 class RegistrationController extends AbstractController
 {
-    #[Route('/register', name: 'app_register')]
-    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): Response
+    #[Route('/api/register', name: 'api_register', methods: ['POST'])]
+    public function register(Request $request, UserPasswordHasherInterface $userPasswordHasher, EntityManagerInterface $entityManager): JsonResponse
     {
-        $user = new User();
-        $form = $this->createForm(RegistrationFormType::class, $user);
-        $form->handleRequest($request);
+        $data = json_decode($request->getContent(), true);
 
-        if ($form->isSubmitted() && $form->isValid()) {
-            // encode the plain password
-            $user->setPassword(
-                $userPasswordHasher->hashPassword(
-                    $user,
-                    $form->get('plainPassword')->getData()
-                )
-            );
-
-            $entityManager->persist($user);
-            $entityManager->flush();
-
-            // do anything else you need here, like send an email
-
-            return $this->redirectToRoute('app_user_index'); // Redirect to user list for verification or login page
+        if (!$data || !isset($data['email']) || !isset($data['password'])) {
+            return $this->json(['error' => 'Email and password are required'], Response::HTTP_BAD_REQUEST);
         }
 
-        return $this->render('registration/register.html.twig', [
-            'registrationForm' => $form->createView(),
-        ]);
+        // Check if user already exists
+        $existingUser = $entityManager->getRepository(User::class)->findOneBy(['email' => $data['email']]);
+        if ($existingUser) {
+            return $this->json(['error' => 'Email is already in use'], Response::HTTP_CONFLICT);
+        }
+
+        $user = new User();
+        $user->setEmail($data['email']);
+        $user->setPassword(
+            $userPasswordHasher->hashPassword(
+                $user,
+                $data['password']
+            )
+        );
+        $user->setNombre($data['nombre'] ?? '');
+        $user->setTelefono($data['telefono'] ?? '');
+        $user->setDireccion($data['direccion'] ?? '');
+
+        $entityManager->persist($user);
+        $entityManager->flush();
+
+        return $this->json([
+            'message' => 'User registered successfully',
+            'id' => $user->getId(),
+            'email' => $user->getUserIdentifier(),
+            'roles' => $user->getRoles(),
+            'nombre' => $user->getNombre(),
+            'telefono' => $user->getTelefono(),
+            'direccion' => $user->getDireccion()
+        ], Response::HTTP_CREATED);
     }
 }

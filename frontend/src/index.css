@@ -1,12 +1,38 @@
 @import "tailwindcss";
 
 @theme {
-  --color-primary: #F3731C; /* Orange */
+  /* Brand Primary */
+  --color-primary: #F3731C; /* Color naranja principal de la marca */
+  --color-primary-dark: #D66317; /* Versión más oscura para hovers */
   --color-secondary: #F2B90D; /* Gold/Amber */
+
+  /* Backgrounds & Neutrals */
+  --color-background-light: #f8f8f6;
+  --color-background-cream: #fafaf5;
+  --color-background-dark: #221f10;
   --color-light: #FAF9F6;
-  --color-gray-light: #9ca3af; /* = Gray 400 in Tailwind */
-  --color-gray-dark: #374151; /* = Gray 800 in Tailwind */
   --color-dark: #333;
+
+  /* Greens */
+  --color-deep-green: #1A3C34;
+  --color-deep-green-light: #2C5E52;
+
+  /* Grays & Text */
+  --color-gray-light: #9ca3af; /* = Gray 400 en Tailwind */
+  --color-gray-dark: #374151; /* = Gray 800 en Tailwind */
+  --color-text-dark: #1a2e1f;
+
+  /* Fonts */
+  --font-display: "Work Sans", "sans-serif";
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
+
+/* Custom scrollbar for ingredient lists if needed */
+.scrollbar-hide::-webkit-scrollbar {
+    display: none;
+}
+.scrollbar-hide {
+    -ms-overflow-style: none;
+    scrollbar-width: none;
+}
