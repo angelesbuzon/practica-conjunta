@@ -1,5 +1,5 @@
-import {Button} from '../components/Button'
-
+import { Button } from '../components/Button'
+import { Link } from 'react-router-dom';
 import heroUrl from "../img/hero.png";
 
 export default function Home() {
@@ -7,7 +7,7 @@ export default function Home() {
         <>
         <section id="hero" className="w-full bg-light pt-12 pb-20 lg:pt-20 lg:pb-28 overflow-hidden">
             {/* Container: */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-0 grid lg:grid-cols-2 justify-between gap-4 items-center">
+            <div className="max-w-7xl w-[95%] mx-auto px-6 lg:px-0 grid lg:grid-cols-2 justify-between gap-4 items-center">
                 {/* Hero text: */}
                 <div className="w-full inline-flex flex-col gap-6">
                     <div className="w-fit flex items-center gap-2 px-3 py-1 rounded-full bg-primary/10 text-primary text-sm font-semibold border border-primary/20">
@@ -47,7 +47,7 @@ export default function Home() {
         </section>
         <section id="categorias" className="w-full bg-white py-12 overflow-hidden">
             {/* Container: */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-0 flex flex-col gap-6">
+            <div className="max-w-7xl w-[95%] mx-auto px-6 lg:px-0 flex flex-col gap-6">
                 <h2 className="font-bold text-2xl">Categorías</h2>
                 <p className="text-gray-dark text-sm">Encuentra la categoría de comida que buscas.</p>
                 <div>
@@ -58,17 +58,23 @@ export default function Home() {
         </section>
         <section id="destacados" className="w-full bg-light py-12 overflow-hidden">
             {/* Container: */}
-            <div className="max-w-7xl mx-auto px-6 lg:px-0 flex flex-col gap-6">
+            <div className="max-w-7xl w-[95%] mx-auto px-6 lg:px-0 flex flex-col gap-6">
                 <h2 className="font-bold text-4xl">Platos destacados</h2>
                 <div>
                     {/* Llamada a API??? */}
                     (WIP)
+                    <Link 
+                        to="/categoria/Seafood" 
+                        className=""
+                    >
+                        Marisco
+                    </Link>
                 </div>
             </div>
         </section>
         <section id="cta" className="w-full bg-light py-12 overflow-hidden">
             {/* Container in orange: */}
-            <div className="max-w-7xl mx-auto p-12 bg-primary text-white xl:rounded-2xl
+            <div className="max-w-7xl w-[95%] mx-auto p-12 bg-primary text-white xl:rounded-2xl
             flex flex-col md:flex-row justify-between items-center gap-6 md:gap-12">
                 <div className="flex flex-col gap-4 md:w-[60%]">
                   <h2 className="font-bold text-4xl">¿Tienes hambre?</h2>
