@@ -24,6 +24,17 @@
 
   /* Fonts */
   --font-display: "Work Sans", "sans-serif";
+<<<<<<< HEAD
+    --color-primary: #ef6c00;
+    --color-primary-dark: #cc5c00;
+    --color-background-light: #f8f8f6;
+    --color-background-cream: #fafaf5;
+    --color-background-dark: #221f10;
+    --color-deep-green: #1a3c34;
+    --color-deep-green-light: #2c5e52;
+    --color-text-dark: #1a2e1f;
+=======
+>>>>>>> ee7e643c98b658019cabb755e214fccc457b6c3e
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
