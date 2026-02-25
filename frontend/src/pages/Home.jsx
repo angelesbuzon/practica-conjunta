@@ -1,5 +1,5 @@
-import { Button } from '../components/Button'
-import { Link } from 'react-router-dom';
+import { Button } from '../components/Button';
+import { CategoryCard } from '../components/CategoryCard';
 import heroUrl from "../img/hero.png";
 
 export default function Home() {
@@ -50,9 +50,13 @@ export default function Home() {
             <div className="max-w-7xl w-[95%] mx-auto px-6 lg:px-0 flex flex-col gap-6">
                 <h2 className="font-bold text-2xl">Categorías</h2>
                 <p className="text-gray-dark text-sm">Encuentra la categoría de comida que buscas.</p>
-                <div>
-                    {/* Llamada a API... */}
-                    (WIP)
+                <div className="w-full flex flex-wrap justify-center gap-6">
+                    <CategoryCard category="Chicken" descriptor="Pollo"></CategoryCard>
+                    <CategoryCard category="Beef" descriptor="Ternera"></CategoryCard>
+                    <CategoryCard category="Seafood" descriptor="Marisco"></CategoryCard>
+                    <CategoryCard category="Pasta" descriptor="Pasta"></CategoryCard>
+                    <CategoryCard category="Vegetarian" descriptor="Vegetariana"></CategoryCard>
+                    <CategoryCard category="Dessert" descriptor="Postres"></CategoryCard>
                 </div>
             </div>
         </section>
@@ -63,15 +67,15 @@ export default function Home() {
                 <div>
                     {/* Llamada a API??? */}
                     (WIP)
-                    <Link to="/categoria/Seafood" className="">
+                    {/* <Link to="/categoria/Seafood" className="">
                         Marisco
-                    </Link>
+                    </Link> */}
                 </div>
             </div>
         </section>
         <section id="cta" className="w-full bg-light py-12 overflow-hidden">
             {/* Container in orange: */}
-            <div className="max-w-7xl w-[95%] mx-auto p-12 bg-primary text-white xl:rounded-2xl
+            <div className="max-w-7xl w-[95%] mx-auto p-12 bg-primary text-white rounded-2xl
             flex flex-col md:flex-row justify-between items-center gap-6 md:gap-12">
                 <div className="flex flex-col gap-4 md:w-[60%]">
                   <h2 className="font-bold text-4xl">¿Tienes hambre?</h2>
