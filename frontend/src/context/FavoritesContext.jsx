@@ -24,7 +24,8 @@ export const FavoritesProvider = ({ children }) => {
         }
         setLoading(true);
         try {
-            const res = await fetch("http://localhost:8001/api/favorites", {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
+            const res = await fetch(`${baseUrl}/favorites`, {
                 credentials: "include",
             });
             if (res.ok) {
@@ -62,7 +63,8 @@ export const FavoritesProvider = ({ children }) => {
         });
 
         try {
-            const url = `http://localhost:8001/api/favorites/${apiId}`;
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
+            const url = `${baseUrl}/favorites/${apiId}`;
             const res = await fetch(url, {
                 method: wasFav ? "DELETE" : "POST",
                 credentials: "include",

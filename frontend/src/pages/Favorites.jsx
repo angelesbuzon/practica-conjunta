@@ -31,8 +31,9 @@ export default function Favorites() {
 
             setLoading(true);
             try {
+                const baseUrl = import.meta.env.VITE_API_BASE_URL;
                 const mealPromises = Array.from(favorites).map(async (apiId) => {
-                    const res = await fetch(`http://localhost:8001/api/meals/lookup?i=${apiId}`);
+                    const res = await fetch(`${baseUrl}/meals/lookup?i=${apiId}`);
                     if (res.ok) {
                         const data = await res.json();
                         return data.meals?.[0] || null;
