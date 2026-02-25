@@ -63,10 +63,7 @@ export default function Home() {
                 <div>
                     {/* Llamada a API??? */}
                     (WIP)
-                    <Link 
-                        to="/categoria/Seafood" 
-                        className=""
-                    >
+                    <Link to="/categoria/Seafood" className="">
                         Marisco
                     </Link>
                 </div>
