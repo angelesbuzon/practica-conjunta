@@ -14,8 +14,9 @@ const Login = () => {
     const handleSubmit = async (e) => {
         e.preventDefault();
         setError('');
+        const baseUrl = import.meta.env.VITE_API_BASE_URL;
         try {
-            const response = await fetch('http://localhost:8000/api/login', {
+            const response = await fetch(`${baseUrl}/login`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',

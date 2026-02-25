@@ -29,7 +29,8 @@ const Register = () => {
         setError('');
         setSuccess('');
         try {
-            const response = await fetch('http://localhost:8000/api/register', {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await fetch(`${baseUrl}/register`, {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +42,7 @@ const Register = () => {
             if (response.ok) {
                 // Auto-login to establish backend session cookie
                 try {
-                    const loginResponse = await fetch('http://localhost:8000/api/login', {
+                    const loginResponse = await fetch(`${baseUrl}/login`, {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',
