@@ -184,6 +184,7 @@ Implementación completa de la funcionalidad de **Favoritos** para usuarios aute
 
 - **Guía de Estilos:** Modificación de la guía de estilos del proyecto, documentando la paleta de colores corporativa, tipografías (Manrope como fuente principal del cuerpo de texto y tipografía serif formal para títulos), espaciados, componentes reutilizables y patrones de diseño. Esta documentación establece los estándares visuales y de código para mantener la coherencia en todo el proyecto y facilitar el trabajo colaborativo del equipo.
 
+-**Modificacion vista Categoría:** En categoría salía el panel lateral de precio máximo, lo cual es ilógico porque no se le puede asignar precio a una categoría pero sí a un plato. Por ello, en categoría se ha quitado la vista lateral, y en categoria/:nombre categoría vuelve a aparecer el panel lateral con el precio máximo. 
 ---
 
 _Este diario se actualizará con los progresos de cada sesión de trabajo._
