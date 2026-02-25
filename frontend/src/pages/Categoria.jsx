@@ -16,8 +16,8 @@ function Categoria() {
     // Si hay un parámetro de categoría, buscamos los platos de esa categoría
     // Si no, mostramos todas las categorías disponibles
     const url = categoryParam 
-      ? `http://localhost:8000/api/meals/filter.php?c=${categoryParam}`
-      : 'http://localhost:8000/api/meals/categories.php';
+      ? `http://localhost:8001/api/meals/filter.php?c=${categoryParam}`
+      : 'http://localhost:8001/api/meals/categories.php';
 
     fetch(url)
       .then(response => {

@@ -29,7 +29,7 @@ const Register = () => {
         setError('');
         setSuccess('');
         try {
-            const response = await fetch('http://localhost:8000/api/register', {
+            const response = await fetch('http://localhost:8001/api/register', {
                 method: 'POST',
                 headers: {
                     'Content-Type': 'application/json',
@@ -41,7 +41,7 @@ const Register = () => {
             if (response.ok) {
                 // Auto-login to establish backend session cookie
                 try {
-                    const loginResponse = await fetch('http://localhost:8000/api/login', {
+                    const loginResponse = await fetch('http://localhost:8001/api/login', {
                         method: 'POST',
                         headers: {
                             'Content-Type': 'application/json',

@@ -2,6 +2,7 @@
 
 namespace App\Controller;
 
+use App\Entity\Favorito;
 use App\Entity\Pedido;
 use App\Entity\Plato;
 use App\Entity\PlatoPedido;
@@ -159,5 +160,98 @@ class ApiController extends AbstractController
         }
 
         return new JsonResponse(['history' => $historial]);
+    }
+
+    // ==================== FAVORITOS ====================
+
+    #[Route('/favorites', name: 'api_favorites_list', methods: ['GET'])]
+    public function getFavorites(): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Usuario no autenticado'], 401);
+        }
+
+        $favoritos = $this->entityManager->getRepository(Favorito::class)->findBy(['id_user' => $user]);
+
+        $apiIds = [];
+        foreach ($favoritos as $fav) {
+            $plato = $fav->getIdPlato();
+            if ($plato) {
+                $apiIds[] = $plato->getApiId();
+            }
+        }
+
+        return new JsonResponse(['favorites' => $apiIds]);
+    }
+
+    #[Route('/favorites/{apiId}', name: 'api_favorites_add', methods: ['POST'])]
+    public function addFavorite(string $apiId, Request $request): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Usuario no autenticado'], 401);
+        }
+
+        $platoRepository = $this->entityManager->getRepository(Plato::class);
+        $plato = $platoRepository->findOneBy(['api_id' => $apiId]);
+
+        if (!$plato) {
+            // Crear el plato en BD con los datos que envía el frontend
+            $data = json_decode($request->getContent(), true) ?? [];
+            $plato = new Plato();
+            $plato->setApiId($apiId);
+            $plato->setNombre($data['strMeal'] ?? 'Desconocido');
+            $plato->setUrlImg($data['strMealThumb'] ?? '');
+            $plato->setOrigen($data['strArea'] ?? 'Desconocido');
+            $plato->setPrecio($data['precio'] ?? '10.00');
+            $this->entityManager->persist($plato);
+        }
+
+        // Comprobar si ya existe el favorito
+        $existingFav = $this->entityManager->getRepository(Favorito::class)->findOneBy([
+            'id_user' => $user,
+            'id_plato' => $plato,
+        ]);
+
+        if ($existingFav) {
+            return new JsonResponse(['message' => 'Ya está en favoritos'], 200);
+        }
+
+        $favorito = new Favorito();
+        $favorito->setIdUser($user);
+        $favorito->setIdPlato($plato);
+        $this->entityManager->persist($favorito);
+        $this->entityManager->flush();
+
+        return new JsonResponse(['message' => 'Añadido a favoritos'], 201);
+    }
+
+    #[Route('/favorites/{apiId}', name: 'api_favorites_remove', methods: ['DELETE'])]
+    public function removeFavorite(string $apiId): JsonResponse
+    {
+        $user = $this->getUser();
+        if (!$user) {
+            return new JsonResponse(['error' => 'Usuario no autenticado'], 401);
+        }
+
+        $plato = $this->entityManager->getRepository(Plato::class)->findOneBy(['api_id' => $apiId]);
+        if (!$plato) {
+            return new JsonResponse(['error' => 'Plato no encontrado'], 404);
+        }
+
+        $favorito = $this->entityManager->getRepository(Favorito::class)->findOneBy([
+            'id_user' => $user,
+            'id_plato' => $plato,
+        ]);
+
+        if (!$favorito) {
+            return new JsonResponse(['error' => 'No estaba en favoritos'], 404);
+        }
+
+        $this->entityManager->remove($favorito);
+        $this->entityManager->flush();
+
+        return new JsonResponse(['message' => 'Eliminado de favoritos'], 200);
     }
 }
