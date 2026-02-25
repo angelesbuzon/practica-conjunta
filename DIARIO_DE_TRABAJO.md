@@ -136,7 +136,14 @@ Mejora de la experiencia de usuario en el frontend mediante la implementación d
 - **Migas de Pan (Breadcrumbs) Funcionales:** Implementación de navegación interactiva en la vista de detalle del plato (`MealDetail.jsx` y `Breadcrumb.jsx`). Ahora los usuarios pueden volver fácilmente a la página principal o a la categoría específica del plato actual mediante enlaces dinámicos, mejorando la usabilidad y el flujo de navegación de la aplicación.
 - **Corrección de Rutas:** Actualización de los enlaces en las tarjetas de productos (`CardProducto.jsx`) para apuntar correctamente a la nueva ruta de detalle de platos (`/plato/:id`), resolviendo problemas de navegación tras la reestructuración del proyecto.
 
----
+**Responsable:** Pepe
 
+**Optimización de Backend y Arquitectura Headless:**
+
+- **Limpieza de Controladores y Vistas:** Eliminación completa de todos los controladores CRUD generados por defecto por Symfony (`CategoriaController`, `PlatoController`, `PedidoController`, etc.) y sus respectivas plantillas Twig.
+- **Transición a API REST:** Consolidación de la arquitectura del backend para que actúe única y exclusivamente como un proveedor de datos (API JSON) para el frontend en React, eliminando el renderizado de vistas en el servidor (a excepción de la ruta base que monta la SPA).
+- **Mantenimiento y Refactorización:** Eliminación de los antiguos formularios (`FormType`) de Symfony y limpieza de enlaces rotos en las plantillas base sobrantes e invalidación de cachés de rutas, logrando un código más limpio y modular.
+
+---
 
 _Este diario se actualizará con los progresos de cada sesión de trabajo._
