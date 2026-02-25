@@ -136,7 +136,15 @@ Mejora de la experiencia de usuario en el frontend mediante la implementación d
 - **Migas de Pan (Breadcrumbs) Funcionales:** Implementación de navegación interactiva en la vista de detalle del plato (`MealDetail.jsx` y `Breadcrumb.jsx`). Ahora los usuarios pueden volver fácilmente a la página principal o a la categoría específica del plato actual mediante enlaces dinámicos, mejorando la usabilidad y el flujo de navegación de la aplicación.
 - **Corrección de Rutas:** Actualización de los enlaces en las tarjetas de productos (`CardProducto.jsx`) para apuntar correctamente a la nueva ruta de detalle de platos (`/plato/:id`), resolviendo problemas de navegación tras la reestructuración del proyecto.
 
----
 
+### Sesión 7 - [25-02-2026]
+
+**Responsable:** Desirée
+
+**Documentación y Estandarización del Diseño:**
+
+- **Guía de Estilos:** Modificación de la guía de estilos del proyecto, documentando la paleta de colores corporativa, tipografías (Manrope como fuente principal del cuerpo de texto y tipografía serif formal para títulos), espaciados, componentes reutilizables y patrones de diseño. Esta documentación establece los estándares visuales y de código para mantener la coherencia en todo el proyecto y facilitar el trabajo colaborativo del equipo.
+
+---
 
 _Este diario se actualizará con los progresos de cada sesión de trabajo._
