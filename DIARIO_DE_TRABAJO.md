@@ -106,6 +106,14 @@ Implementación completa de la funcionalidad de **Favoritos** para usuarios aute
 - **Sincronización con repositorio:**
     - Actualización de la rama `Detalle-pedidos` con los últimos cambios del repositorio principal (`upstream/main`).
 
----
+**Responsable:** Ángeles
+
+**Detalles técnicos adicionales implementados en esta sesión:**
+
+- **Desarrollo de Componentes:**
+    - Investigación del componente Link usado por los compañeros, y dejado plantilla en Home para ampliar más adelante.
+
+
+-------
 
 _Este diario se actualizará con los progresos de cada sesión de trabajo._
