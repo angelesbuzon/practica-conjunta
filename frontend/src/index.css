@@ -16,7 +16,6 @@
     --color-deep-green: #1a3c34;
     --color-deep-green-light: #2c5e52;
     --color-text-dark: #1a2e1f;
-    --font-display: "Work Sans", "sans-serif";
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
