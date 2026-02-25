@@ -1,22 +1,29 @@
 @import "tailwindcss";
 
 @theme {
+  /* Brand Primary */
   --color-primary: #F3731C; /* Color naranja principal de la marca */
   --color-primary-dark: #D66317; /* Versión más oscura para hovers */
+  --color-secondary: #F2B90D; /* Gold/Amber */
+
+  /* Backgrounds & Neutrals */
   --color-background-light: #f8f8f6;
+  --color-background-cream: #fafaf5;
   --color-background-dark: #221f10;
+  --color-light: #FAF9F6;
+  --color-dark: #333;
+
+  /* Greens */
   --color-deep-green: #1A3C34;
   --color-deep-green-light: #2C5E52;
+
+  /* Grays & Text */
+  --color-gray-light: #9ca3af; /* = Gray 400 en Tailwind */
+  --color-gray-dark: #374151; /* = Gray 800 en Tailwind */
+  --color-text-dark: #1a2e1f;
+
+  /* Fonts */
   --font-display: "Work Sans", "sans-serif";
-    --color-primary: #ef6c00;
-    --color-primary-dark: #cc5c00;
-    --color-background-light: #f8f8f6;
-    --color-background-cream: #fafaf5;
-    --color-background-dark: #221f10;
-    --color-deep-green: #1a3c34;
-    --color-deep-green-light: #2c5e52;
-    --color-text-dark: #1a2e1f;
-    --font-display: "Work Sans", "sans-serif";
 }
 
 @custom-variant dark (&:where(.dark, .dark *));
