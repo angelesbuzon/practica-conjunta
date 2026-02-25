@@ -15,9 +15,10 @@ function Categoria() {
     
     // Si hay un parámetro de categoría, buscamos los platos de esa categoría
     // Si no, mostramos todas las categorías disponibles
+    const baseUrl = import.meta.env.VITE_API_BASE_URL;
     const url = categoryParam 
-      ? `http://localhost:8001/api/meals/filter.php?c=${categoryParam}`
-      : 'http://localhost:8001/api/meals/categories.php';
+      ? `${baseUrl}/meals/filter.php?c=${categoryParam}`
+      : `${baseUrl}/meals/categories.php`;
 
     fetch(url)
       .then(response => {

@@ -42,7 +42,8 @@ export default function Profile() {
         setMessage({ type: '', text: '' });
 
         try {
-            const response = await fetch('http://localhost:8001/api/profile', {
+            const baseUrl = import.meta.env.VITE_API_BASE_URL;
+            const response = await fetch(`${baseUrl}/profile`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json',
