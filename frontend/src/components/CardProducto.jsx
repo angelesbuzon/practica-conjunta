@@ -21,6 +21,11 @@ function CardProducto({ producto, isCategory = false }) {
   const liked = isFavorite(idMeal);
 
   const handleAddToCart = () => {
+    // Si el usuario no está logueado, redirigir a Login y abortar
+    if (!user) {
+      navigate('/login');
+      return;
+    }
     // Añadimos el producto al carrito usando el contexto
     addToCart(producto);
     console.log('Añadido al carrito:', producto.strMeal);

@@ -7,11 +7,13 @@ import IngredientsSection from '../components/mealDetail/IngredientsSection';
 import PurchaseCard from '../components/mealDetail/PurchaseCard';
 import RecommendationsSection from '../components/mealDetail/RecommendationsSection';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const MealDetail = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [recipeData, setRecipeData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -159,6 +161,10 @@ const MealDetail = () => {
             discount={recipeData.purchaseParams.discount}
             deliveryInfo={recipeData.purchaseParams.deliveryInfo}
             onAddToCart={(qty) => {
+              if (!user) {
+                navigate('/login');
+                return;
+              }
               // Mapear los datos de vuelta al formato que espera el Carrito (propiedades de la API original)
               const cartItemFormat = {
                 idMeal: recipeData.id,
