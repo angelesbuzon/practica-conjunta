@@ -75,7 +75,8 @@ const MealDetail = () => {
               urgency: 'Pídelo en las próximas 2h 15m',
               time: '19:00 de hoy'
             }
-          }
+          },
+          rawMeal: meal
         });
       } catch (err) {
         console.error('Error fetching recipe data:', err);
@@ -165,14 +166,15 @@ const MealDetail = () => {
                 navigate('/login');
                 return;
               }
-              // Mapear los datos de vuelta al formato que espera el Carrito (propiedades de la API original)
+              // Mapear los datos de vuelta al formato que espera el Carrito (incluyendo los ingredientes originales de la API)
               const cartItemFormat = {
                 idMeal: recipeData.id,
                 strMeal: recipeData.title,
                 strMealThumb: recipeData.imageSrc,
                 precio: recipeData.purchaseParams.price.toFixed(2),
                 strCategory: recipeData.category,
-                strArea: 'General' // O extraer si lo tenemos
+                strArea: 'General',
+                ...recipeData.rawMeal // Incluye strIngredient1, strMeasure1, etc.
               };
               addToCart(cartItemFormat, qty);
               navigate('/cart');

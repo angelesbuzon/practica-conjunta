@@ -20,15 +20,34 @@ function CardProducto({ producto, isCategory = false }) {
 
   const liked = isFavorite(idMeal);
 
-  const handleAddToCart = () => {
+  const handleAddToCart = async () => {
     // Si el usuario no está logueado, redirigir a Login y abortar
     if (!user) {
       navigate('/login');
       return;
     }
-    // Añadimos el producto al carrito usando el contexto
+
+    // Buscamos los detalles completos si no tenemos los ingredientes
+    if (!producto.strIngredient1) {
+      try {
+        const baseUrl = import.meta.env.VITE_API_BASE_URL;
+        const res = await fetch(`${baseUrl}/meals/lookup.php?i=${idMeal}`);
+        if (res.ok) {
+          const data = await res.json();
+          if (data.meals && data.meals[0]) {
+            const fullMeal = { ...producto, ...data.meals[0] };
+            fullMeal.precio = producto.precio; // Mantenemos el precio inyectado
+            addToCart(fullMeal);
+            return;
+          }
+        }
+      } catch (err) {
+        console.error("Error fetching full meal details", err);
+      }
+    }
+
+    // Si ya los tenemos o falló la búsqueda, añadimos lo que hay
     addToCart(producto);
-    console.log('Añadido al carrito:', producto.strMeal);
   };
 
   const handleToggleFavorite = () => {

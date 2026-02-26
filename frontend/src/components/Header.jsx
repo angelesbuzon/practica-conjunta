@@ -47,16 +47,18 @@ const [isMenuOpen, setIsMenuOpen] = useState(false);
               <span className="material-icons text-black group-hover:text-primary active:text-primary transition-colors">person_outline</span>
             </Link>
 
-            {/* Bolsa de la compra estilizada (tipo pastilla) */}
-            <Link to="/cart" className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full hover:bg-primary/20 transition-all relative group">
-              <span className="material-icons text-primary transition-colors">shopping_bag</span>
-              <span className="text-primary font-bold text-sm sm:text-base">{finalTotal} €</span>
-              {cartCount > 0 && (
-                <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-[20px] px-1 bg-primary text-white text-[11px] font-bold rounded-full border-2 border-white">
-                  {cartCount}
-                </span>
-              )}
-            </Link>   
+            {/* Bolsa de la compra estilizada (tipo pastilla, solo si hay usuario logueado) */}
+            {user && (
+              <Link to="/cart" className="flex items-center gap-2 px-4 py-2 bg-primary/10 rounded-full hover:bg-primary/20 transition-all relative group">
+                <span className="material-icons text-primary transition-colors">shopping_bag</span>
+                <span className="text-primary font-bold text-sm sm:text-base">{finalTotal} €</span>
+                {cartCount > 0 && (
+                  <span className="absolute -top-1 -right-1 flex items-center justify-center min-w-[20px] h-[20px] px-1 bg-primary text-white text-[11px] font-bold rounded-full border-2 border-white">
+                    {cartCount}
+                  </span>
+                )}
+              </Link>
+            )}
 
             {/* Botón para moviles (abre el buscador) */}
             <button 

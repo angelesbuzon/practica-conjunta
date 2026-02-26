@@ -21,6 +21,12 @@ export default function Cart() {
 
     const navigate = useNavigate();
 
+    useEffect(() => {
+        if (!user) {
+            navigate('/login');
+        }
+    }, [user, navigate]);
+
     const baseUrl = import.meta.env.VITE_API_BASE_URL;
 
     // Delivery and Taxes are now calculated in CartContext
@@ -202,13 +208,17 @@ export default function Cart() {
                                                 
                                                 {/* Ingredients Accordion Mock */}
                                                 <div className="mt-4 bg-background-light dark:bg-background-dark rounded-lg p-3 border border-stone-200 dark:border-stone-700">
-                                                    <p className="text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-2">Ingredientes (Tags):</p>
+                                                    <p className="text-xs font-semibold uppercase tracking-wider text-stone-500 dark:text-stone-400 mb-2">Ingredientes:</p>
                                                     <div className="flex flex-wrap gap-2">
-                                                        {item.strTags ? item.strTags.split(',').slice(0, 4).map(tag => (
-                                                            <span key={tag} className="inline-flex items-center px-2 py-1 rounded text-xs font-medium bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700">
-                                                                {tag.trim()}
-                                                            </span>
-                                                        )) : (
+                                                        {Array.from({ length: 20 }, (_, i) => item[`strIngredient${i + 1}`])
+                                                            .filter(ingredient => ingredient && ingredient.trim() !== '')
+                                                            .slice(0, 8)
+                                                            .map((ingredient, index) => (
+                                                                <span key={index} className="inline-flex items-center px-2.5 py-1 rounded-md text-xs font-medium bg-white dark:bg-stone-800 border border-stone-200 dark:border-stone-700 text-stone-600 dark:text-stone-300 shadow-sm transition-colors hover:bg-stone-50 dark:hover:bg-stone-700">
+                                                                    {ingredient.trim()}
+                                                                </span>
+                                                            ))}
+                                                        {(!item.strIngredient1 || item.strIngredient1.trim() === '') && (
                                                             <span className="text-xs text-stone-400 italic">No especificados</span>
                                                         )}
                                                     </div>
@@ -219,9 +229,10 @@ export default function Cart() {
                                             <div className="flex justify-between items-center mt-6">
                                                 <button 
                                                     onClick={() => fullyRemoveFromCart(item.idMeal)}
-                                                    className="text-sm text-stone-400 hover:text-red-500 flex items-center gap-1 transition-colors bg-transparent border-none cursor-pointer p-0"
+                                                    className="group flex items-center gap-1.5 px-3 py-1.5 rounded-lg text-sm font-medium text-stone-500 hover:text-red-600 hover:bg-red-50 dark:hover:bg-red-900/20 transition-all border border-transparent hover:border-red-100 dark:hover:border-red-900/30 cursor-pointer"
                                                 >
-                                                    <span className="material-icons text-lg">delete_outline</span> Eliminar
+                                                    <span className="material-icons text-lg transition-transform group-hover:scale-110">delete_outline</span>
+                                                    <span>Eliminar</span>
                                                 </button>
                                                 <div className="flex items-center bg-background-light dark:bg-stone-800 rounded-lg p-1 border border-stone-200 dark:border-stone-700">
                                                     <button 
