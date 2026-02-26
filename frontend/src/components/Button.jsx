@@ -17,7 +17,7 @@ export function Button({anchorText, url, color}) {
 
     // Classes depending on colors:
     if (color == `primary`) {
-        styleClasses += `bg-primary border-primary text-white`;
+        styleClasses += `bg-primary border-primary text-white hover:bg-primary-dark`;
     } else if (color == `invertedPrimary`) {
         styleClasses += `bg-white border-white text-primary`;
     } else if (color == `secondary`) {

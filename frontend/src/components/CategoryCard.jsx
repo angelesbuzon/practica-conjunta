@@ -12,7 +12,7 @@ export function CategoryCard({category, descriptor}) {
                 <div>
                     <img src={imgPath} className="max-w-16 rounded-full" />
                 </div>
-                <h3 className="font-bold">{descriptor}</h3>
+                <h3 className="font-bold text-dark">{descriptor}</h3>
             </article>
         </Link>
     );
