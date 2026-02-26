@@ -1,5 +1,9 @@
 import { Link } from 'react-router-dom';
 
+/**
+ * Used in Home.jsx for listing featured categories
+ */
+
 export function CategoryCard({category, descriptor}) {
     // Category should be capitalized for the URL, e.g. Seafood
     const categoryPath = `/categoria/${category}`;
