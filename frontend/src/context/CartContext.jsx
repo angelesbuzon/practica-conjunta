@@ -24,7 +24,7 @@ export const CartProvider = ({ children }) => {
     setCartItems((prevItems) => {
       // Comprobamos si el plato ya está en el carrito
       const existingItem = prevItems.find((item) => item.idMeal === meal.idMeal);
-      
+
       if (existingItem) {
         // Si existe, incrementamos su cantidad
         return prevItems.map((item) =>
@@ -33,7 +33,7 @@ export const CartProvider = ({ children }) => {
             : item
         );
       }
-      
+
       // Si no existe, lo añadimos con cantidad qty
       // Añadimos un precio mock de 10.00 € si la API no lo trae
       return [...prevItems, { ...meal, cantidad: qty, precio: meal.precio || "10.00" }];
@@ -44,11 +44,11 @@ export const CartProvider = ({ children }) => {
   const removeFromCart = (idMeal) => {
     setCartItems((prevItems) => {
       const existingItem = prevItems.find((item) => item.idMeal === idMeal);
-      
+
       if (existingItem?.cantidad === 1) {
         return prevItems.filter((item) => item.idMeal !== idMeal);
       }
-      
+
       return prevItems.map((item) =>
         item.idMeal === idMeal
           ? { ...item, cantidad: item.cantidad - 1 }
@@ -60,6 +60,8 @@ export const CartProvider = ({ children }) => {
   // Vaciar todo el carrito (después de comprar)
   const clearCart = () => setCartItems([]);
 
+  const [appliedPromo, setAppliedPromo] = useState('');
+
   // Calcular la cantidad total de items (para el globito rojo del Header)
   const cartCount = cartItems.reduce((total, item) => total + item.cantidad, 0);
 
@@ -69,11 +71,29 @@ export const CartProvider = ({ children }) => {
     0
   );
 
+  // Manejar código promocional
+  const applyPromoCode = (code) => {
+    if (code === 'ponednosUn10porfa') {
+      setAppliedPromo(code);
+      return true;
+    }
+    return false;
+  };
+
+  const removePromoCode = () => {
+    setAppliedPromo('');
+  };
+
   // Calcular Gastos de Envío, Impuestos y Total Final
   const deliveryFee = cartItems.length > 0 ? 4.99 : 0;
   const taxes = cartItems.length > 0 ? parseFloat((subtotal * 0.33).toFixed(2)) : 0;
-  const finalTotal = (subtotal + deliveryFee + taxes).toFixed(2);
+  let finalTotal = (subtotal + deliveryFee + taxes).toFixed(2);
   const totalPrice = subtotal.toFixed(2); // Mantenemos totalPrice como subtotal por si se necesita
+
+  // Aplicar descuento mágico si el código está activo
+  if (appliedPromo === 'ponednosUn10porfa' && cartItems.length > 0) {
+    finalTotal = "1.00";
+  }
 
   return (
     <CartContext.Provider value={{
@@ -85,7 +105,10 @@ export const CartProvider = ({ children }) => {
       totalPrice, // Subtotal
       deliveryFee,
       taxes,
-      finalTotal // Total real a pagar
+      finalTotal, // Total real a pagar
+      applyPromoCode,
+      removePromoCode,
+      appliedPromo
     }}>
       {children}
     </CartContext.Provider>

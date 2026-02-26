@@ -5,7 +5,10 @@ const AuthContext = createContext();
 export const useAuth = () => useContext(AuthContext);
 
 export const AuthProvider = ({ children }) => {
-    const [user, setUser] = useState(null);
+    const [user, setUser] = useState(() => {
+        const storedUser = localStorage.getItem('user');
+        return storedUser ? JSON.parse(storedUser) : null;
+    });
 
     const logout = () => {
         setUser(null);
@@ -14,9 +17,8 @@ export const AuthProvider = ({ children }) => {
     };
 
     const checkSession = async () => {
-        const storedUser = localStorage.getItem('user');
-        if (!storedUser) return;
-        
+        if (!user) return;
+
         try {
             const baseUrl = import.meta.env.VITE_API_BASE_URL;
             // Usamos /favorites como endpoint ligero para verificar sesión (401 si expiró)
@@ -31,11 +33,9 @@ export const AuthProvider = ({ children }) => {
         }
     };
 
-    // Al cargar la app, revisamos si hay usuario guardado en el localStorage
+    // Al cargar la app, revisamos si la sesión sigue activa en el backend
     useEffect(() => {
-        const storedUser = localStorage.getItem('user');
-        if (storedUser) {
-            setUser(JSON.parse(storedUser));
+        if (user) {
             checkSession();
         }
     }, []);
