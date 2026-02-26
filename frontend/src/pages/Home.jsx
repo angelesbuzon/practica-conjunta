@@ -14,7 +14,7 @@ export default function Home() {
                         <span className="material-icons">restaurant</span>
                         <span>Experiencia gourmet</span>
                     </div>
-                    <h1 className="font-bold text-6xl">
+                    <h1 className="font-bold text-6xl text-dark">
                         Tus platos favoritos, con <span className="text-primary">ingredientes frescos</span>
                     </h1>
                     <p className="text-gray-dark">
@@ -48,7 +48,7 @@ export default function Home() {
         <section id="categorias" className="w-full bg-white py-12 overflow-hidden">
             {/* Container: */}
             <div className="max-w-7xl w-[95%] mx-auto px-6 lg:px-0 flex flex-col gap-6">
-                <h2 className="font-bold text-2xl">Categorías</h2>
+                <h2 className="font-bold text-2xl text-dark">Categorías</h2>
                 <p className="text-gray-dark text-sm">Encuentra la categoría de comida que buscas.</p>
                 <div className="w-full flex flex-wrap justify-center gap-6">
                     <CategoryCard category="Chicken" descriptor="Pollo"></CategoryCard>
@@ -57,13 +57,23 @@ export default function Home() {
                     <CategoryCard category="Pasta" descriptor="Pasta"></CategoryCard>
                     <CategoryCard category="Vegetarian" descriptor="Vegetariana"></CategoryCard>
                     <CategoryCard category="Dessert" descriptor="Postres"></CategoryCard>
+                    
+                    {/* Special pseudo-CategoryCard: */}
+                    <a href="./categoria/">
+                    <article className="min-w-30 flex flex-col items-center gap-4 border-1 border-primary bg-primary hover:bg-primary-dark text-primary hover:text-primary-dark w-fit rounded-2xl p-4 hover:scale-[1.1] transition-all">
+                        <div className="w-16 h-16 rounded-full  bg-white flex justify-center items-center text-xl font-bold">
+                            +
+                        </div>
+                        <h3 className="font-bold text-white">Ver más</h3>
+                    </article>
+                    </a>
                 </div>
             </div>
         </section>
         <section id="destacados" className="w-full bg-light py-12 overflow-hidden">
             {/* Container: */}
             <div className="max-w-7xl w-[95%] mx-auto px-6 lg:px-0 flex flex-col gap-6">
-                <h2 className="font-bold text-4xl">Platos destacados</h2>
+                <h2 className="font-bold text-4xl text-dark">Platos destacados</h2>
                 <div>
                     {/* Llamada a API??? */}
                     (WIP)
