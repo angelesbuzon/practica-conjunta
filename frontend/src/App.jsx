@@ -4,6 +4,7 @@ import { AuthProvider } from './context/AuthContext';
 import { FavoritesProvider } from './context/FavoritesContext';
 import Home from './pages/Home';
 import Categoria from './pages/Categoria';
+import Search from './pages/Search';
 import MealDetail from './pages/MealDetail';
 import Cart from './pages/Cart';
 import History from './pages/History';
@@ -24,6 +25,7 @@ function App() {
           <main>
           <Routes>
             <Route path="/" element={<Home />} />
+            <Route path="/search" element={<Search />} />
             <Route path="/categoria" element={<Categoria />} />
             <Route path="/categoria/:cat" element={<Categoria />} />
             <Route path="/plato/:id" element={<MealDetail />} />

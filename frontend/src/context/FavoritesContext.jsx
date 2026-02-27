@@ -12,7 +12,7 @@ const FavoritesContext = createContext();
 export const useFavorites = () => useContext(FavoritesContext);
 
 export const FavoritesProvider = ({ children }) => {
-    const { user } = useAuth();
+    const { user, logout } = useAuth();
     const [favorites, setFavorites] = useState(new Set());
     const [loading, setLoading] = useState(false);
 
@@ -28,6 +28,12 @@ export const FavoritesProvider = ({ children }) => {
             const res = await fetch(`${baseUrl}/favorites`, {
                 credentials: "include",
             });
+            
+            if (res.status === 401) {
+                logout();
+                return;
+            }
+            
             if (res.ok) {
                 const data = await res.json();
                 setFavorites(new Set(data.favorites));
@@ -80,6 +86,9 @@ export const FavoritesProvider = ({ children }) => {
             });
 
             if (!res.ok) {
+                if (res.status === 401) {
+                    logout();
+                }
                 // Revertir si falla
                 setFavorites((prev) => {
                     const next = new Set(prev);

@@ -7,11 +7,13 @@ import IngredientsSection from '../components/mealDetail/IngredientsSection';
 import PurchaseCard from '../components/mealDetail/PurchaseCard';
 import RecommendationsSection from '../components/mealDetail/RecommendationsSection';
 import { useCart } from '../context/CartContext';
+import { useAuth } from '../context/AuthContext';
 import { useNavigate } from 'react-router-dom';
 
 const MealDetail = () => {
   const { id } = useParams();
   const { addToCart } = useCart();
+  const { user } = useAuth();
   const navigate = useNavigate();
   const [recipeData, setRecipeData] = useState(null);
   const [loading, setLoading] = useState(true);
@@ -73,7 +75,8 @@ const MealDetail = () => {
               urgency: 'Pídelo en las próximas 2h 15m',
               time: '19:00 de hoy'
             }
-          }
+          },
+          rawMeal: meal
         });
       } catch (err) {
         console.error('Error fetching recipe data:', err);
@@ -159,14 +162,19 @@ const MealDetail = () => {
             discount={recipeData.purchaseParams.discount}
             deliveryInfo={recipeData.purchaseParams.deliveryInfo}
             onAddToCart={(qty) => {
-              // Mapear los datos de vuelta al formato que espera el Carrito (propiedades de la API original)
+              if (!user) {
+                navigate('/login');
+                return;
+              }
+              // Mapear los datos de vuelta al formato que espera el Carrito (incluyendo los ingredientes originales de la API)
               const cartItemFormat = {
                 idMeal: recipeData.id,
                 strMeal: recipeData.title,
                 strMealThumb: recipeData.imageSrc,
                 precio: recipeData.purchaseParams.price.toFixed(2),
                 strCategory: recipeData.category,
-                strArea: 'General' // O extraer si lo tenemos
+                strArea: 'General',
+                ...recipeData.rawMeal // Incluye strIngredient1, strMeasure1, etc.
               };
               addToCart(cartItemFormat, qty);
               navigate('/cart');
