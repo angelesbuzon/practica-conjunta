@@ -228,4 +228,18 @@ Implementación completa de la funcionalidad de **Favoritos** para usuarios aute
 
 ---
 
+### Sesión 9 - [27-02-2026]
+
+**Responsable:** Rubén
+
+**Implementación del Buscador Dinámico:**
+
+- **Actualización del componente Header:** Refactorización de `Header.jsx` para convertir los campos de búsqueda en formularios controlados (`onSubmit`), permitiendo navegar a los resultados al oprimir la tecla Enter.
+- **Nueva Vista de Búsqueda:** Creación de la página `Search.jsx` para gestionar, filtrar y renderizar dinámicamente los resultados solicitados.
+- **Integración con API REST:** Configuración para leer el parámetro `q` de la URL (`useSearchParams`) y realizar una consulta asíncrona al proxy backend de Symfony (`/api/meals/search.php?s=...`), para obtener coincidencias reales desde TheMealDB.
+- **UX UI / Control de Estados:** Implementación de pantallas de "Cargando" (Spinners), control de excepciones (Errores 500/404) y fallbacks amigables ("No se encontraron resultados") mejorando la reactividad visual del sistema.
+- **Enrutamiento:** Inclusión de la nueva ruta pública `/search` en la instancia central de Router (`App.jsx`).
+
+---
+
 _Este diario se actualizará con los progresos de cada sesión de trabajo._
