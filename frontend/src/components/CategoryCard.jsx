@@ -7,8 +7,9 @@ import { Link } from 'react-router-dom';
 export function CategoryCard({category, descriptor}) {
     // Category should be capitalized for the URL, e.g. Seafood
     const categoryPath = `/categoria/${category}`;
+    // And in lowercase for the img, e.g. seafood (a bit risky but works if imgs are consistently named)
     category = category.toLowerCase();
-    const imgPath = `../src/img/${category}.png`; // This is a bit risky but works if imgs are consistently named
+    const imgPath = `../src/img/${category}.png`;
 
     return (
         <Link to={categoryPath}>
