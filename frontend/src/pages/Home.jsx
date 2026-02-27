@@ -1,5 +1,7 @@
 import { Button } from '../components/Button';
 import { CategoryCard } from '../components/CategoryCard';
+import { DishCard } from '../components/DishCard';
+
 import heroUrl from "../img/hero.png";
 
 export default function Home() {
@@ -51,12 +53,12 @@ export default function Home() {
                 <h2 className="font-bold text-2xl text-dark">Categorías</h2>
                 <p className="text-gray-dark text-sm">Encuentra la categoría de comida que buscas.</p>
                 <div className="w-full flex flex-wrap justify-center gap-6">
-                    <CategoryCard category="Chicken" descriptor="Pollo"></CategoryCard>
-                    <CategoryCard category="Beef" descriptor="Ternera"></CategoryCard>
-                    <CategoryCard category="Seafood" descriptor="Marisco"></CategoryCard>
-                    <CategoryCard category="Pasta" descriptor="Pasta"></CategoryCard>
-                    <CategoryCard category="Vegetarian" descriptor="Vegetariana"></CategoryCard>
-                    <CategoryCard category="Dessert" descriptor="Postres"></CategoryCard>
+                    <CategoryCard category="Chicken" descriptor="Pollo" />
+                    <CategoryCard category="Beef" descriptor="Ternera" />
+                    <CategoryCard category="Seafood" descriptor="Marisco" />
+                    <CategoryCard category="Pasta" descriptor="Pasta" />
+                    <CategoryCard category="Vegetarian" descriptor="Vegetariana" />
+                    <CategoryCard category="Dessert" descriptor="Postres" />
                     
                     {/* Special pseudo-CategoryCard: */}
                     <a href="./categoria/">
@@ -74,12 +76,27 @@ export default function Home() {
             {/* Container: */}
             <div className="max-w-7xl w-[95%] mx-auto px-6 lg:px-0 flex flex-col gap-6">
                 <h2 className="font-bold text-4xl text-dark">Platos destacados</h2>
-                <div>
-                    {/* Llamada a API??? */}
-                    (WIP)
-                    {/* <Link to="/categoria/Seafood" className="">
-                        Marisco
-                    </Link> */}
+                <div className="w-full flex flex-wrap justify-center gap-6">
+                    <DishCard
+                        name="Ajo blanco"
+                        description="El primo del gazpacho que no necesita tomate para brillar."
+                        price="19.87" />
+                    <DishCard
+                        name="Espagueti a la carbonara"
+                        description="Sí, lleva nata. Pero es la prueba de que la felicidad se enrolla con un tenedor."
+                        price="19.86" />
+                    <DishCard 
+                        name="Calamares fritos"
+                        description="Unos aros dorados y crujientes que desaparecen más rápido que tu sueldo a principios de mes."
+                        price="17.94" />
+                    <DishCard
+                        name="Cuscús de pollo"
+                        description="Un viaje exprés al Magreb sin pasar por el aeropuerto."
+                        price="20.50" />
+                    <DishCard
+                        name="Tarta de manzana"
+                        description="El abrazo de una abuela convertido en postre."
+                        price="8.40" />
                 </div>
             </div>
         </section>
